@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Escena/TestMovimientoV1.unity
+  isLoaded: 1
+  isActive: 1
