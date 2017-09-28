@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlJugador : MonoBehaviour {
+public class ControlJugador : MonoBehaviour
+{
     Movimiento mMovimiento;
-	// Use this for initialization
-	void Start () {
+    
+    void Start()
+    {
         mMovimiento = GetComponent<Movimiento>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    
+    void Update()
+    {
         mMovimiento.HMove();
-	}
+        //Pendiente: Separar cuerpo con cabeza/arma
+        mMovimiento.Apuntar();
+        mMovimiento.Dash();
+
+    }
 }
