@@ -11,6 +11,10 @@ public class Movimiento : MonoBehaviour
     Transform mTransform;
     Rigidbody mRigidbody;
     Transform cTransform;
+    [SerializeField]
+    float dashCD;
+    bool onCDD = false;
+    float tD = 0f;
 
     void Start()
     {
@@ -42,41 +46,54 @@ public class Movimiento : MonoBehaviour
     public void Apuntar()
     {
         //direccion del personaje dictada por el mouse
-        float yCamara = cTransform.position.y;
-        float yPosition = mTransform.position.y;
-        float distanciaEyPYyC = Mathf.Abs(yCamara - yPosition);
-
+        
+        float distanciaECYP = Vector3.Distance(cTransform.position, mTransform.position);
         Ray Rayo = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Vector3 ubicacionM = Rayo.GetPoint(distanciaEyPYyC);
+        Vector3 ubicacionM = Rayo.GetPoint(distanciaECYP);
         Vector3 puntero = new Vector3(ubicacionM.x, mTransform.position.y, ubicacionM.z);
         mTransform.LookAt(puntero);
     }
 
     public void Dash()
     {
+      
         
-        if (Input.GetButtonDown("Dash"))
+        if (onCDD)
         {
-            float xD = Input.GetAxis("Horizontal");
-            float zD = Input.GetAxis("Vertical");
-
-            Vector3 dirD;
-            if (zD == 0 && xD == 0)
+            tD += Time.deltaTime;
+            if (tD >= dashCD)
             {
-                dirD = mTransform.forward;
-
+                onCDD = false;
+                tD = 0;
             }
-            else
-            {
-                dirD = new Vector3(xD, 0, zD);
-            }
-            
-            
-            float senD = 1f;
-            
-            Vector3 fuerzaD = dirD * magD * senD;
-            mRigidbody.AddForce(fuerzaD);
         }
+        if (!onCDD)
+        {
+            if (Input.GetButtonDown("Dash"))
+            {
 
+                float xD = Input.GetAxis("Horizontal");
+                float zD = Input.GetAxis("Vertical");
+
+                Vector3 dirD;
+                if (zD == 0 && xD == 0)
+                {
+                    dirD = mTransform.forward;
+                }
+                else
+                {
+                    dirD = new Vector3(xD, 0, zD);
+                }
+                float senD = 1f;
+                Vector3 fuerzaD = dirD * magD * senD;
+                mRigidbody.AddForce(fuerzaD);
+                Debug.Log(fuerzaD);
+                onCDD = true;
+            }
+        }
+       
+
+      
     }
+
 }

@@ -9,16 +9,20 @@ public class MovCamara : MonoBehaviour {
 
 	void Start () {
         mTrans = GetComponent<Transform>();
+        //cambiar "mona" por player
         jTrans = GameObject.Find("mona").GetComponent<Transform>();
 	}
 	
 	
 	void Update () {
-        float newx = (Mathf.Abs(jTrans.position.x)+((Input.mousePosition.x)- (Camera.main.pixelWidth/2))/ (Camera.main.pixelWidth/magnitud)) /2;
-        float newz = (Mathf.Abs(jTrans.position.z)+((Input.mousePosition.y)- (Camera.main.pixelHeight/ 2))/ (Camera.main.pixelHeight/magnitud)) /2;
-        
-        Vector3 posi = new Vector3 (newx,9f,newz-2f);
-        mTrans.position = posi;        
-        
-	}
+
+        float distancia = Vector3.Distance(mTrans.position,jTrans.position)/(1.1f);
+        Ray Rayo = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector3 ubicacionM = Rayo.GetPoint(distancia);
+        Vector3 puntero = new Vector3(ubicacionM.x,mTrans.position.y, ubicacionM.z);
+
+        Vector3 posi = (puntero + jTrans.position) / 2;
+
+        mTrans.position = new Vector3 (posi.x,12,posi.z-4) ;
+    }
 }
