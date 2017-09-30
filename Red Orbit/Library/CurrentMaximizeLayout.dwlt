@@ -21,10 +21,10 @@ MonoBehaviour:
     y: 30
     width: 1366
     height: 635
-  m_MinSize: {x: 713, y: 492}
-  m_MaxSize: {x: 18008, y: 14042}
+  m_MinSize: {x: 707, y: 471}
+  m_MaxSize: {x: 18002, y: 14021}
   vertical: 0
-  controlID: 5438
+  controlID: 3923
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 421}
   m_MaxSize: {x: 4002, y: 8021}
   vertical: 1
-  controlID: 5439
+  controlID: 3924
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -298,10 +298,10 @@ MonoBehaviour:
     y: 0
     width: 240
     height: 635
-  m_MinSize: {x: 234, y: 492}
-  m_MaxSize: {x: 10004, y: 14042}
+  m_MinSize: {x: 230, y: 471}
+  m_MaxSize: {x: 10000, y: 14021}
   vertical: 1
-  controlID: 5204
+  controlID: 3773
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -364,7 +364,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Modelos
+    - Assets/Codigo
   m_ViewMode: 0
   m_StartGridSize: 16
   m_LastFolders: []
@@ -401,7 +401,7 @@ MonoBehaviour:
       m_ResourceFile: 
   m_AssetTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 8c250000
+    m_SelectedIDs: 7e250000
     m_LastClickedID: 0
     m_ExpandedIDs: 00000000bc240000e4240000fa240000022500000a250000
     m_RenameOverlay:
@@ -428,8 +428,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 8c250000
-    m_LastClickedInstanceID: 9612
+    m_SelectedInstanceIDs: 7e250000
+    m_LastClickedInstanceID: 9598
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 6634000000000000
     m_RenameOverlay:
@@ -511,8 +511,8 @@ MonoBehaviour:
     height: 206
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 8c250000
-    m_LastClickedID: 9612
+    m_SelectedIDs: 7e250000
+    m_LastClickedID: 9598
     m_ExpandedIDs: e8fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -554,8 +554,8 @@ MonoBehaviour:
     y: 0
     width: 320
     height: 635
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -587,7 +587,7 @@ MonoBehaviour:
     y: 92
     width: 318
     height: 614
-  m_ScrollPosition: {x: 0, y: 434.95508}
+  m_ScrollPosition: {x: 0, y: 0}
   m_InspectorMode: 0
   m_PreviewResizer:
     m_CachedPref: 100

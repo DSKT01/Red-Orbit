@@ -24,7 +24,7 @@ public class MovCamara : MonoBehaviour
         Vector3 ubicacionM = Rayo.GetPoint(distancia);
         Vector3 puntero = new Vector3(ubicacionM.x, mTrans.position.y, ubicacionM.z);
         Vector3 posi = (puntero + jTrans.position) / 2;
-        Vector3 posiF = new Vector3(posi.x, 13, posi.z - 5);
+        Vector3 posiF = new Vector3(posi.x, 13, posi.z - 6.88f);
         float x = ((Vector3.Distance(mTrans.position, posiF)) / 2) * 30f * Time.deltaTime;
         mTrans.position = Vector3.MoveTowards(mTrans.position, posiF, x);
     }
