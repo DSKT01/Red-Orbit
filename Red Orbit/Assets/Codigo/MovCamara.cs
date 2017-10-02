@@ -26,13 +26,13 @@ public class MovCamara : MonoBehaviour
             Ray Rayo = Camera.main.ScreenPointToRay(Input.mousePosition);
             Vector3 ubicacionM = Rayo.GetPoint(distancia);
             Vector3 posi = (ubicacionM + jTrans.position) / 2;
-            Vector3 posiF = new Vector3(posi.x,jTrans.position.y + 9.5f, posi.z - 6.88f); 
+            Vector3 posiF = new Vector3(posi.x,jTrans.position.y + 9.9f, posi.z - 6.88f); 
             float x = ((Vector3.Distance(mTrans.position, posiF)) / 2) * 30f * Time.deltaTime;
             mTrans.position = Vector3.MoveTowards(mTrans.position, posiF, x);
         }
         else
         {
-            Vector3 posiFs = new Vector3(jTrans.position.x, jTrans.position.y + 9.5f, jTrans.position.z - 6.88f);
+            Vector3 posiFs = new Vector3(jTrans.position.x, jTrans.position.y + 9.9f, jTrans.position.z - 6.88f);
             float y = ((Vector3.Distance(mTrans.position, posiFs)) / 2) * 3 * Time.deltaTime;
             mTrans.position = Vector3.MoveTowards(mTrans.position, posiFs, y);
 

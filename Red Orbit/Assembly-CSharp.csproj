@@ -46,10 +46,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Codigo\Arma.cs" />
      <Compile Include="Assets\Codigo\ControlJugador.cs" />
      <Compile Include="Assets\Codigo\ControlLuces.cs" />
      <Compile Include="Assets\Codigo\MovCamara.cs" />
      <Compile Include="Assets\Codigo\Movimiento.cs" />
+     <Compile Include="Assets\Codigo\Proyectil.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

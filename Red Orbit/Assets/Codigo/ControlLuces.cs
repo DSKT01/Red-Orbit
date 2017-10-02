@@ -8,11 +8,12 @@ public class ControlLuces : MonoBehaviour
     GameObject jugador;
     Transform jTransform;
     Movimiento jMovimiento;
-    bool activado = false;  
+    bool activado = false;
     Light mLuz;
-    float t=0;
+    float t = 0;
     float CD;
-  
+    Rect Pantalla;
+
     // Use this for initialization
     void Start()
     {
@@ -28,15 +29,17 @@ public class ControlLuces : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Salto") && activado==false)
+        Pantalla = new Rect(0, 0, Screen.width, Screen.height);
+        mTransform.LookAt(jTransform);
+
+        if (Input.GetButtonDown("Salto") && activado == false)
         {
             activado = true;
-          
         }
-        mTransform.LookAt(jTransform);
+
         if (activado)
         {
-            mLuz.intensity = (Mathf.Sin(Mathf.Pow(t*2f, 2))+1)/2;
+            mLuz.intensity = (Mathf.Sin(Mathf.Pow(t * 2f, 2)) + 1) / 2;
             mLuz.color = new Color(1, (220 / 255), (160 / 255), 1);
             t += Time.deltaTime;
             if (t >= CD)
@@ -50,6 +53,8 @@ public class ControlLuces : MonoBehaviour
             mLuz.color = new Color(1, 1, 1, 1);
             mLuz.intensity = 1;
         }
+
+
     }
-    
+
 }
