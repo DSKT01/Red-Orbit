@@ -11,8 +11,7 @@ public class Movimiento : MonoBehaviour
     Transform mTransform;
     Rigidbody mRigidbody;
     Transform cTransform;
-    [SerializeField]
-    float dashCD;
+    public float dashCD;
     bool onCDD = false;
     float tD = 0f;
 
@@ -63,7 +62,7 @@ public class Movimiento : MonoBehaviour
 
     }
 
-    public void Dash()
+    public void Salto()
     {
 
 
@@ -80,7 +79,7 @@ public class Movimiento : MonoBehaviour
         {
 
 
-            if (Input.GetButtonDown("Dash"))
+            if (Input.GetButtonDown("Salto"))
             {
 
                 float xD = Input.GetAxis("Horizontal");

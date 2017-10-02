@@ -21,7 +21,7 @@ public class ControlJugador : MonoBehaviour
             mMovimiento.HMove();
             //Pendiente: Separar cuerpo con cabeza/arma
             mMovimiento.Apuntar();
-            mMovimiento.Dash();
+            mMovimiento.Salto();
         }
 
     }
