@@ -59,7 +59,7 @@ public class Movimiento : MonoBehaviour
         Vector3 ubicacionM = Rayo.GetPoint(distanciaECYP);
         Vector3 puntero = new Vector3(ubicacionM.x, mTransform.position.y, ubicacionM.z);
         mTransform.LookAt(puntero);
-
+        
     }
 
     public void Salto()

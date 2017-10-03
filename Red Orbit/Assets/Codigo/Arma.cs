@@ -80,7 +80,7 @@ public class Arma : MonoBehaviour {
         #region Recargar
         if (tRecarga < t)
         {
-            Debug.Log("Recargando prro");
+           
             recargando = true;
             tRecarga -= Time.deltaTime;
 
