@@ -52,6 +52,7 @@
      <Compile Include="Assets\Codigo\MovCamara.cs" />
      <Compile Include="Assets\Codigo\Movimiento.cs" />
      <Compile Include="Assets\Codigo\Proyectil.cs" />
+     <Compile Include="Assets\Codigo\SeleccionPJ.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -18,28 +18,31 @@ public class Arma : MonoBehaviour {
      *  2. Hacer que la luz parpadee mientras recarga munición.
      *  
      */
+
     [SerializeField]
     float tRecarga;
     float t;            // Tiempo de recarga.
     [SerializeField]
-    float intensidadLuz;
+    Color colorArma;
     [SerializeField]
     int municion;
     int m;              // Cantidad de balas que se pueden disparar.
     [SerializeField]
     bool recargando;
-    Light mLuz;
+    Renderer mColor;
     Transform cTransform;
     float rotacion;
     
 
     void Start() {
         recargando = false;
+        colorArma = new Color(1, 0, 0);
+
         m = municion;   //almacena el valor de la munición para que al recargar esta vuelva a llenarse.
         t = tRecarga;   //almacena el tiempo que va a demorar la recarga.
 
-        mLuz = GetComponent<Light>();
-        mLuz.intensity = intensidadLuz;
+        mColor = GetComponent<Renderer>();
+        mColor.material.color = colorArma;
 
         rotacion = transform.eulerAngles.x;
 
@@ -49,15 +52,13 @@ public class Arma : MonoBehaviour {
     }
 
     void Update() {
+
         Disparar();
         Apuntar();
         
         
     }
-    void Movimiento()
-    {
-        transform.position = new Vector3(jTransform.position.x + 2, jTransform.position.y, jTransform.position.z);
-    }
+
     /// <summary>
     /// Incluye recarga
     /// </summary>
@@ -76,7 +77,7 @@ public class Arma : MonoBehaviour {
                 Proyectil p = pClon.GetComponent<Proyectil>();    //  <---- Componente proyectil del clon.
                 p.disparado = true;
 
-                mLuz.intensity -= intensidadLuz / m;
+                mColor.material.color -= colorArma / m;
 
                 municion--;
             }
@@ -94,7 +95,7 @@ public class Arma : MonoBehaviour {
                 recargando = false;
                 municion = m;   // La munición vuelve a llenarse.
                 tRecarga = t;   // Se reinicia el cooldown.
-                mLuz.intensity = intensidadLuz;     // Se reinicia la intensidad de la luz.
+                mColor.material.color = colorArma;     // Se reinicia la intensidad de la luz.
             }
         }
 

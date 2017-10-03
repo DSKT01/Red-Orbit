@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class Movimiento : MonoBehaviour
 {
-    enum Direccion
-    {
-        Atras,
-        Adelante
-    };
   
-    Direccion mDireccion;
     [SerializeField]
     float mag;
     [SerializeField]
@@ -61,35 +55,14 @@ public class Movimiento : MonoBehaviour
     public void Apuntar()
     {
         //direccion del personaje dictada por el mouse
-        /*
+        
         float distanciaECYP = Vector3.Distance(cTransform.position, mTransform.position);
         Ray Rayo = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 ubicacionM = Rayo.GetPoint(distanciaECYP);
         Vector3 puntero = new Vector3(ubicacionM.x, mTransform.position.y, ubicacionM.z);
         mTransform.LookAt(puntero);
-        */
-        float dif = Mathf.Abs(mTransform.eulerAngles.y - aTransform.eulerAngles.y);
-        if ((dif > 90f) && (dif < 270f))
-        {
-            mDireccion = Direccion.Atras;
-        }
-        else
-        {
-            mDireccion = Direccion.Adelante;
-        }
-
-        switch (mDireccion)
-        {
-            case Direccion.Atras:
-                transform.LookAt(dirMov);
-                break;
-            case Direccion.Adelante:
-                transform.LookAt(-dirMov);
-                break;
-            default:
-                break;
-        }
-        Debug.Log(dif);
+        
+        
 
     }
 
