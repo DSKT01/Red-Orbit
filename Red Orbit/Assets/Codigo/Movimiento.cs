@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Movimiento : MonoBehaviour
 {
+    enum Direccion
+    {
+        Atras,
+        Adelante
+    };
+  
+    Direccion mDireccion;
     [SerializeField]
     float mag;
     [SerializeField]
@@ -14,21 +21,20 @@ public class Movimiento : MonoBehaviour
     public float dashCD;
     bool onCDD = false;
     float tD = 0f;
-
+    Transform aTransform;
+    Vector3 dirMov;
+    
 
     void Start()
     {
         mTransform = GetComponent<Transform>();
         mRigidbody = GetComponent<Rigidbody>();
         cTransform = GameObject.Find("PCamara").GetComponent<Transform>();
+        aTransform = GameObject.Find("ArmaCube").GetComponent<Transform>();
     }
-
     void Update()
     {
-
-
     }
-
     public void HMove()
     {
         float x = (Mathf.Abs(2 - mTransform.position.y));
@@ -48,24 +54,47 @@ public class Movimiento : MonoBehaviour
         float senH = Input.GetAxis("Horizontal");
         Vector3 VelocidadH = senH * dirH * mag * y;
         mTransform.position += VelocidadH * Time.deltaTime;
+        mTransform.up = new Vector3(0, 1, 0);
+        
     }
     //Pendiente: Separar cuerpo con cabeza/arma
     public void Apuntar()
     {
         //direccion del personaje dictada por el mouse
-
+        /*
         float distanciaECYP = Vector3.Distance(cTransform.position, mTransform.position);
         Ray Rayo = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 ubicacionM = Rayo.GetPoint(distanciaECYP);
         Vector3 puntero = new Vector3(ubicacionM.x, mTransform.position.y, ubicacionM.z);
         mTransform.LookAt(puntero);
-        
+        */
+        float dif = Mathf.Abs(mTransform.eulerAngles.y - aTransform.eulerAngles.y);
+        if ((dif > 90f) && (dif < 270f))
+        {
+            mDireccion = Direccion.Atras;
+        }
+        else
+        {
+            mDireccion = Direccion.Adelante;
+        }
+
+        switch (mDireccion)
+        {
+            case Direccion.Atras:
+                transform.LookAt(dirMov);
+                break;
+            case Direccion.Adelante:
+                transform.LookAt(-dirMov);
+                break;
+            default:
+                break;
+        }
+        Debug.Log(dif);
+
     }
 
     public void Salto()
     {
-
-
         if (onCDD)
         {
             tD += Time.deltaTime;
@@ -77,11 +106,8 @@ public class Movimiento : MonoBehaviour
         }
         if (!onCDD)
         {
-
-
             if (Input.GetButtonDown("Salto"))
             {
-
                 float xD = Input.GetAxis("Horizontal");
                 float zD = Input.GetAxis("Vertical");
 
@@ -99,13 +125,7 @@ public class Movimiento : MonoBehaviour
                 mRigidbody.AddForce(fuerzaD);
 
                 onCDD = true;
-
             }
         }
-
-
-
     }
-
-
 }

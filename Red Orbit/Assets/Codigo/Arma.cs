@@ -31,7 +31,7 @@ public class Arma : MonoBehaviour {
     Light mLuz;
     Transform cTransform;
     float rotacion;
-
+    
 
     void Start() {
         recargando = false;
@@ -45,14 +45,19 @@ public class Arma : MonoBehaviour {
 
         // apuntar:
         cTransform = GameObject.Find("PCamara").GetComponent<Transform>();
+     
     }
 
     void Update() {
         Disparar();
         Apuntar();
         
+        
     }
-
+    void Movimiento()
+    {
+        transform.position = new Vector3(jTransform.position.x + 2, jTransform.position.y, jTransform.position.z);
+    }
     /// <summary>
     /// Incluye recarga
     /// </summary>

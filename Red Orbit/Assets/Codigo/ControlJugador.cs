@@ -14,13 +14,10 @@ public class ControlJugador : MonoBehaviour
 
     
     void Update()
-    {
-       
+    {      
             mMovimiento.HMove();
             //Pendiente: Separar cuerpo con cabeza/arma
             mMovimiento.Apuntar();
-            mMovimiento.Salto();
-        
-
+            mMovimiento.Salto();        
     }
 }
