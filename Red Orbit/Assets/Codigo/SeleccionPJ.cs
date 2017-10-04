@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SeleccionPJ : MonoBehaviour
 {
-    public bool seleccionPJ = true;
+   
     // Use this for initialization
     void Start()
     {

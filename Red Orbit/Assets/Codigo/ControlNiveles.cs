@@ -10,7 +10,7 @@ public class ControlNiveles : MonoBehaviour {
     public bool estado;
     public int contador;
 
-    float t;
+  
 
 	// Use this for initialization
 	void Start () {
@@ -26,7 +26,7 @@ public class ControlNiveles : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (contador == enemigos[nivel - 1])
+        if (contador >= enemigos[nivel - 1])
         {
             nivel++;
             estado = true;

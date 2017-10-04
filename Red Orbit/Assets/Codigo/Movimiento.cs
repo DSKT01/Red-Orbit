@@ -13,11 +13,14 @@ public class Movimiento : MonoBehaviour
     Rigidbody mRigidbody;
     Transform cTransform;
     public float dashCD;
-    bool onCDD = false;
+    bool onCDSalto = false;     
     float tD = 0f;
     Transform aTransform;
     Vector3 dirMov;
-    
+
+    AudioSource mAudio;
+    AudioClip aPasos, aSalto;
+    bool enTierra = false;
 
     void Start()
     {
@@ -25,9 +28,15 @@ public class Movimiento : MonoBehaviour
         mRigidbody = GetComponent<Rigidbody>();
         cTransform = GameObject.Find("PCamara").GetComponent<Transform>();
         aTransform = GameObject.Find("ArmaCube").GetComponent<Transform>();
+
+        mAudio = GetComponent<AudioSource>();
+        aPasos = Resources.Load("Audios/Pasos") as AudioClip;
+        aSalto = Resources.Load("Audios/Salto") as AudioClip;
+
     }
     void Update()
     {
+        Debug.Log(enTierra);
     }
     public void HMove()
     {
@@ -51,7 +60,8 @@ public class Movimiento : MonoBehaviour
         mTransform.up = new Vector3(0, 1, 0);
         
     }
-    //Pendiente: Separar cuerpo con cabeza/arma
+                                                                                //Pendiente: Separar cuerpo con cabeza/arma
+
     public void Apuntar()
     {
         //direccion del personaje dictada por el mouse
@@ -68,18 +78,18 @@ public class Movimiento : MonoBehaviour
 
     public void Salto()
     {
-        if (onCDD)
+        if (onCDSalto)                  //  Aquí no salta!
         {
             tD += Time.deltaTime;
             if (tD >= dashCD)
             {
-                onCDD = false;
+                onCDSalto = false;
                 tD = 0;
             }
         }
-        if (!onCDD)
+        if (!onCDSalto)
         {
-            if (Input.GetButtonDown("Salto"))
+            if (Input.GetButtonDown("Salto"))       //  Aquí salta!
             {
                 float xD = Input.GetAxis("Horizontal");
                 float zD = Input.GetAxis("Vertical");
@@ -97,8 +107,61 @@ public class Movimiento : MonoBehaviour
                 Vector3 fuerzaD = dirD * magD * senD;
                 mRigidbody.AddForce(fuerzaD);
 
-                onCDD = true;
+                onCDSalto = true;
             }
         }
+
     }
+
+    public void Sonar()
+    {
+        #region Pasos
+        if (Input.GetAxis("Horizontal") != 0 ||
+            Input.GetAxis("Vertical") != 0)
+        {
+            // Reproducir sonido de pasos
+            mAudio.clip = aPasos;
+            if (!mAudio.isPlaying)
+            {
+                if (enTierra)
+                    mAudio.Play();
+            }
+            mAudio.loop = true;
+        }
+        else
+        {
+           if (mAudio.isPlaying)   // Detener el aPasos si no se está moviendo.
+            {
+                if (mAudio.clip != aSalto)  //Comparar el clip de Audio.
+                    mAudio.Stop();
+            }
+        }
+        #endregion
+
+        if (!enTierra)
+        {
+            
+        }
+    }
+
+    void OnCollisionEnter (Collision _colision)
+    {
+        GameObject objeto = _colision.gameObject;
+        if (objeto.tag == "Terreno")
+            enTierra = true;
+    }
+    void OnCollisionExit(Collision _colision)
+    {
+        GameObject objeto = _colision.gameObject;
+        if (objeto.tag == "Terreno")
+        {
+            enTierra = false;
+            mAudio.clip = aSalto;
+            mAudio.loop = false;
+            mAudio.Play();
+        }
+            
+
+    }
+
 }
