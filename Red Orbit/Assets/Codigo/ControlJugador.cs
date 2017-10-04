@@ -7,13 +7,16 @@ public class ControlJugador : MonoBehaviour
 {
     public float life = 10f;
     Movimiento mMovimiento;
-    Scrollbar barraVida;
+    Image barraVida;
     Arma arma;
+    GameObject muerte;
     void Start()
     {
         mMovimiento = GetComponent<Movimiento>();
-        barraVida = GameObject.Find("Barra").GetComponent<Scrollbar>();
+        barraVida = GameObject.Find("Barra").GetComponent<Image>();
         arma = GetComponentInChildren<Arma>();
+        barraVida.fillAmount = 1;
+        muerte = GameObject.Find("Muerte");
     }
 
 
@@ -27,12 +30,18 @@ public class ControlJugador : MonoBehaviour
             mMovimiento.Salto();
             arma.Disparar();
             arma.Apuntar();
+       if (life <= 0)
+        {
+            Time.timeScale = 0;
+            muerte.SetActive(true);
+            
+        }
         
         
     }
     public void Damage(float x)
     {
         life = life - x;
-        barraVida.size = life / 10f;
+        barraVida.fillAmount = life / 10f;
     }
 }

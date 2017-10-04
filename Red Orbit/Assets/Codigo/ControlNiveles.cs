@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class ControlNiveles : MonoBehaviour {
 
@@ -9,7 +11,9 @@ public class ControlNiveles : MonoBehaviour {
     public int[] enemigos;
     public bool estado;
     public int contador;
-
+    Text nHorda;
+    //temporal
+    MenuPrincipal victoria;
   
 
 	// Use this for initialization
@@ -21,15 +25,21 @@ public class ControlNiveles : MonoBehaviour {
         nivel = 1;
         contador = 0;
         estado = true;
-	}
+        nHorda = GameObject.Find("Horda").GetComponent<Text>();
+        victoria = GameObject.Find("Canvas").GetComponent<MenuPrincipal>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-
+        nHorda.text = "Horda # " + nivel;
         if (contador >= enemigos[nivel - 1])
         {
             nivel++;
             estado = true;
+            if (nivel >= 4)
+            {
+                victoria.Menu();
+            }
         }
 
         if (nivel==1 && estado)

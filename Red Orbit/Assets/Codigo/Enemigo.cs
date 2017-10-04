@@ -34,10 +34,10 @@ public class Enemigo : MonoBehaviour
 
         mAudio = GetComponent<AudioSource>();
         aQuejidos = new AudioClip[] {Resources.Load("Audios/QuejidoEnemigo01") as AudioClip, 
-            Resources.Load("Audios/QuejidoEnemigo02") as AudioClip,
-            Resources.Load("Audios/QuejidoEnemigo03") as AudioClip,
-            Resources.Load("Audios/QuejidoEnemigo04") as AudioClip};
-    }
+            Resources.Load("Audios/Quejido Enemigo 02") as AudioClip,
+            Resources.Load("Audios/Quejido Enemigo 03") as AudioClip,
+            Resources.Load("Audios/Quejido Enemigo 04") as AudioClip};
+    } 
 
     // Update is called once per frame
     void Update()
