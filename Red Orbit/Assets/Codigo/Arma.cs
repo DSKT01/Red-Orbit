@@ -111,6 +111,7 @@ public class Arma : MonoBehaviour {
 
     public void Apuntar()
     {
+        
         float distanciaECYP = Vector3.Distance(cTransform.position, transform.position);
         Ray Rayo = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 ubicacionM = Rayo.GetPoint(distanciaECYP);
@@ -118,11 +119,12 @@ public class Arma : MonoBehaviour {
         transform.LookAt(puntero);
 
         // Rotación en x.-------------------------------------------------------------------
-
+        /*
         float distanciaJyP = Vector3.Distance(transform.position, puntero);
         float a = -distanciaJyP/4;
         Vector3 giro = new Vector3(a, 0, 0);
 
         transform.eulerAngles += giro;
+        */
     }
 }
