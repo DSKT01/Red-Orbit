@@ -69,7 +69,7 @@ public class Arma : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire1"))   // instanciar el proyectil.
         {
-            if (recargando == false)    // Si no está recargando.
+            if ((recargando == false) && (Time.timeScale == 1))    // Si no está recargando.
             {
                 proyectil = GameObject.Find("Proyectil");
                 pClon = Instantiate(proyectil, pos, Quaternion.identity);

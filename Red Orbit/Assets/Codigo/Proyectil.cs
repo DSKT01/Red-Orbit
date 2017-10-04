@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Proyectil : MonoBehaviour {
+public class Proyectil : MonoBehaviour
+{
 
     /*LAS BALAS SE DESTRUIRÁN DESPUES DE 3 SEGUNDOS DE HABER TOCADO EL PISO, LUEGO CUANDO 
      *HABLEMOS DE DIFERENTES TIPOS DE PROYECTILES CAMBIAMOS LO QUE SEA NECESARIO.
@@ -20,9 +21,10 @@ public class Proyectil : MonoBehaviour {
     public bool disparado;
     bool colisiono;     // Si colisionó o no contra el piso.
 
-	// Use this for initialization
-	void Start () {
-        
+    // Use this for initialization
+    void Start()
+    {
+
         //Salir disparadas al ser creadas.
         mCuerpo = GetComponent<Rigidbody>();
         trArma = GameObject.Find("ArmaCube").GetComponent<Transform>();  // CAMBIAR ARMACUBE POR EL NOMBRE DEL ARMA
@@ -34,26 +36,31 @@ public class Proyectil : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         Destruirse();
     }
 
     void OnCollisionEnter(Collision _piso)
     {
-        colisiono = true;
+        GameObject piso = _piso.gameObject;
+        if (piso.tag == "Terreno")
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void Destruirse()
     {
         if (disparado == true)
         {
-            if (colisiono == true)
-                contador += Time.deltaTime;
+
+            contador += Time.deltaTime;
 
             if (contador > duración)
                 Destroy(this.gameObject);
         }
-        
+
 
     }
 }
