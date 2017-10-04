@@ -53,8 +53,7 @@ public class Arma : MonoBehaviour {
 
     void Update() {
 
-        Disparar();
-        Apuntar();
+        
         
         
     }
@@ -62,7 +61,7 @@ public class Arma : MonoBehaviour {
     /// <summary>
     /// Incluye recarga
     /// </summary>
-    void Disparar()
+    public void Disparar()
     {
         GameObject proyectil, pClon;
         Transform trRef = transform.Find("Referencia").GetComponent<Transform>();
@@ -110,7 +109,7 @@ public class Arma : MonoBehaviour {
         #endregion
     }
 
-    void Apuntar()
+    public void Apuntar()
     {
         float distanciaECYP = Vector3.Distance(cTransform.position, transform.position);
         Ray Rayo = Camera.main.ScreenPointToRay(Input.mousePosition);

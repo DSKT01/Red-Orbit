@@ -49,6 +49,7 @@
      <Compile Include="Assets\Codigo\Arma.cs" />
      <Compile Include="Assets\Codigo\ControlJugador.cs" />
      <Compile Include="Assets\Codigo\ControlLuces.cs" />
+     <Compile Include="Assets\Codigo\Enemigo1.cs" />
      <Compile Include="Assets\Codigo\MovCamara.cs" />
      <Compile Include="Assets\Codigo\Movimiento.cs" />
      <Compile Include="Assets\Codigo\Proyectil.cs" />
