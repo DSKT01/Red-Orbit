@@ -29,11 +29,9 @@ public class Arma : MonoBehaviour {
     int m;              // Cantidad de balas que se pueden disparar.
     [SerializeField]
     bool recargando;
-    float rotacion;
     Renderer mColor;
     Transform cTransform;
-
-    AudioSource mAudio; 
+    float rotacion;
     
 
     void Start() {
@@ -50,14 +48,14 @@ public class Arma : MonoBehaviour {
 
         // apuntar:
         cTransform = GameObject.Find("PCamara").GetComponent<Transform>();
-
-        //sonidos:
-        mAudio = GetComponent<AudioSource>();
      
     }
 
     void Update() {
 
+        
+        
+        
     }
 
     /// <summary>
@@ -71,7 +69,7 @@ public class Arma : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire1"))   // instanciar el proyectil.
         {
-            if (!recargando && Time.timeScale == 1)    // Si no está recargando y el tiempo está corriendo.
+            if ((recargando == false) && (Time.timeScale == 1))    // Si no está recargando.
             {
                 proyectil = GameObject.Find("Proyectil");
                 pClon = Instantiate(proyectil, pos, Quaternion.identity);
@@ -79,7 +77,6 @@ public class Arma : MonoBehaviour {
                 p.disparado = true;
 
                 mColor.material.color -= colorArma / m;
-                mAudio.Play();
 
                 municion--;
             }
@@ -122,12 +119,12 @@ public class Arma : MonoBehaviour {
         transform.LookAt(puntero);
 
         // Rotación en x.-------------------------------------------------------------------
-
+        /*
         float distanciaJyP = Vector3.Distance(transform.position, puntero);
         float a = -distanciaJyP/4;
         Vector3 giro = new Vector3(a, 0, 0);
 
         transform.eulerAngles += giro;
+        */
     }
-
 }

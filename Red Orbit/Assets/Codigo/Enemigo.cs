@@ -17,12 +17,7 @@ public class Enemigo : MonoBehaviour
     public float velocidad = 5f;
     public float daño = 1f;
     public float distanciaDe = 0f;
-    bool c = true;
     ControlNiveles control;
-
-    AudioSource mAudio;
-    AudioClip[] aQuejidos;
-    int num;
 
     // Use this for initialization
     void Start()
@@ -31,12 +26,6 @@ public class Enemigo : MonoBehaviour
         target = GameObject.Find("Jugador").GetComponent<Transform>();
         mTransform = GetComponent<Transform>();
         control = GameObject.Find("Nivel").GetComponent<ControlNiveles>();
-
-        mAudio = GetComponent<AudioSource>();
-        aQuejidos = new AudioClip[] {Resources.Load("Audios/QuejidoEnemigo01") as AudioClip, 
-            Resources.Load("Audios/QuejidoEnemigo02") as AudioClip,
-            Resources.Load("Audios/QuejidoEnemigo03") as AudioClip,
-            Resources.Load("Audios/QuejidoEnemigo04") as AudioClip};
     }
 
     // Update is called once per frame
@@ -63,14 +52,8 @@ public class Enemigo : MonoBehaviour
             }
             if (lifeE <= 0)
             {
-                
-                if (c)
-                {
-                    control.contador++;
-                    c = false;
-                }
-                Destroy(this.gameObject, 0.2f);
-                
+                Destroy(this.gameObject);
+                control.contador++;
             }
         }
         
@@ -89,15 +72,12 @@ public class Enemigo : MonoBehaviour
             cj.Damage(1);
 
         }
-        
         if (objeto.tag == "Bala")
         {
             Damage(1);
+            Destroy(objeto);
             
-
-                  
         }
-        
 
     }
     public void Damage (float x)

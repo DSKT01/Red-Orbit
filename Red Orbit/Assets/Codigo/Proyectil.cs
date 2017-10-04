@@ -21,8 +21,6 @@ public class Proyectil : MonoBehaviour
     public bool disparado;
     bool colisiono;     // Si colisionó o no contra el piso.
 
-    AudioSource mAudio;
-
     // Use this for initialization
     void Start()
     {
@@ -34,8 +32,6 @@ public class Proyectil : MonoBehaviour
         mCuerpo.AddForce(trArma.forward * magnitud);   //salir disparado.
 
         colisiono = false;
-
-        mAudio = GetComponent<AudioSource>();
 
     }
 
@@ -52,11 +48,6 @@ public class Proyectil : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        if (piso.tag == "Enemigo")
-        {
-            
-            Destroy(this.gameObject);
-        }
     }
 
     void Destruirse()
@@ -68,7 +59,6 @@ public class Proyectil : MonoBehaviour
 
             if (contador > duración)
                 Destroy(this.gameObject);
-            
         }
 
 
