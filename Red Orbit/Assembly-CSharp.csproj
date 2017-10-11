@@ -50,6 +50,7 @@
      <Compile Include="Assets\Codigo\ControlJugador.cs" />
      <Compile Include="Assets\Codigo\ControlLuces.cs" />
      <Compile Include="Assets\Codigo\ControlNiveles.cs" />
+     <Compile Include="Assets\Codigo\Direccion.cs" />
      <Compile Include="Assets\Codigo\Enemigo.cs" />
      <Compile Include="Assets\Codigo\MenuPrincipal.cs" />
      <Compile Include="Assets\Codigo\MovCamara.cs" />

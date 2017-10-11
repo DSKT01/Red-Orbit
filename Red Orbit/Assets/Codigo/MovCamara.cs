@@ -52,8 +52,8 @@ public class MovCamara : MonoBehaviour
 
             if (Pantalla.Contains(Input.mousePosition))
             {
-
-                Cursor.SetCursor(puntero, new Vector3(16, 16), CursorMode.Auto);
+                
+                Cursor.SetCursor(puntero, new Vector2(16,16), CursorMode.Auto);
             }
             else
             {

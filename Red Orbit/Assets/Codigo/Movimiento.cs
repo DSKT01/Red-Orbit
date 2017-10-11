@@ -65,12 +65,14 @@ public class Movimiento : MonoBehaviour
     public void Apuntar()
     {
         //direccion del personaje dictada por el mouse
-        
-        float distanciaECYP = Vector3.Distance(cTransform.position, mTransform.position);
+
+        /*float distanciaECYP = Vector3.Distance(cTransform.position, mTransform.position);
         Ray Rayo = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 ubicacionM = Rayo.GetPoint(distanciaECYP);
         Vector3 puntero = new Vector3(ubicacionM.x, mTransform.position.y, ubicacionM.z);
-        mTransform.LookAt(puntero);
+        mTransform.LookAt(puntero);*/
+        Transform dirApunte = GameObject.Find("Direccion").GetComponent<Transform>();
+        mTransform.LookAt(dirApunte);
         
         
 

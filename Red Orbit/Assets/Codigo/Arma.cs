@@ -123,11 +123,11 @@ public class Arma : MonoBehaviour {
 
         // Rotación en x.-------------------------------------------------------------------
 
-        float distanciaJyP = Vector3.Distance(transform.position, puntero);
+        /*float distanciaJyP = Vector3.Distance(transform.position, puntero);
         float a = -distanciaJyP/4;
         Vector3 giro = new Vector3(a, 0, 0);
 
-        transform.eulerAngles += giro;
+        transform.eulerAngles += giro;*/
     }
 
 }
