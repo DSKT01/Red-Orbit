@@ -103,7 +103,7 @@ public class Movimiento : MonoBehaviour
                 }
                 else
                 {
-                    dirD = new Vector3(xD, 1, zD);
+                    dirD = new Vector3(xD, 0, zD);
                 }
                 float senD = 1f;
                 Vector3 fuerzaD = dirD * magD * senD;

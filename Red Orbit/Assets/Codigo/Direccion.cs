@@ -5,7 +5,8 @@ using UnityEngine;
 public class Direccion : MonoBehaviour
 {
     Transform mTrasn;
-
+    Vector3 lastPosition;
+    Vector3 dir;
     // Use this for initialization
     void Start()
     {
@@ -17,9 +18,17 @@ public class Direccion : MonoBehaviour
     {
         float dirH = Input.GetAxis("Horizontal");
         float dirV = Input.GetAxis("Vertical");
-        Vector3 dir = new Vector3(dirH, 0, dirV);
-        mTrasn.localPosition = dir;
+        dir = new Vector3(dirH, 0, dirV);
+        if ((dirH != 0) || (dirV != 0))
+        {
+            Almacen();
+        }
+        mTrasn.localPosition = lastPosition;
 
+    }
 
+    void Almacen()
+    {
+        lastPosition = dir;
     }
 }

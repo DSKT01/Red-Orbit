@@ -27,9 +27,18 @@ public class MovCamara : MonoBehaviour
             if (Pantalla.Contains(Input.mousePosition))
             {
                 Cursor.SetCursor(puntero, new Vector3(16, 16), CursorMode.Auto);
+                if (Time.timeScale == 0)
+                {
+                    Cursor.visible = true;
+                }
+                else
+                {
+                    Cursor.visible = false;
+                }
+                
                 float distancia = Vector3.Distance(mTrans.position, jTrans.position) * 0.9f;
-                Ray Rayo = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Vector3 ubicacionM = Rayo.GetPoint(distancia);
+                Ray RayoA = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Vector3 ubicacionM = new Vector3  (RayoA.GetPoint(distancia).x, jTrans.position.y, RayoA.GetPoint(distancia).z) ;             
                 Vector3 posi = (ubicacionM + jTrans.position) / 2;
                 Vector3 posiF = new Vector3(posi.x, jTrans.position.y + 9.9f, posi.z - 6.88f);
                 float x = ((Vector3.Distance(mTrans.position, posiF)) / 2) * 30f * Time.deltaTime;
@@ -52,8 +61,8 @@ public class MovCamara : MonoBehaviour
 
             if (Pantalla.Contains(Input.mousePosition))
             {
-                
-                Cursor.SetCursor(puntero, new Vector2(16,16), CursorMode.Auto);
+
+                Cursor.SetCursor(puntero, new Vector2(16, 16), CursorMode.Auto);
             }
             else
             {

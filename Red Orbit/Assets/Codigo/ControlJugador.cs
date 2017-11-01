@@ -7,15 +7,18 @@ public class ControlJugador : MonoBehaviour
 {
     public float life = 10f;
     Movimiento mMovimiento;
-    Image barraVida;
+    Image barraVidaUno;
+    Image barraVidaDos;
     Arma arma;
     GameObject muerte;
     void Start()
     {
         mMovimiento = GetComponent<Movimiento>();
-        barraVida = GameObject.Find("Barra").GetComponent<Image>();
+        barraVidaUno = GameObject.Find("BarraR").GetComponent<Image>();
+        barraVidaDos = GameObject.Find("BarraL").GetComponent<Image>();
         arma = GetComponentInChildren<Arma>();
-        barraVida.fillAmount = 1;
+        barraVidaUno.fillAmount = 1;
+        barraVidaDos.fillAmount = 1;
         muerte = GameObject.Find("Muerte");
     }
 
@@ -42,6 +45,7 @@ public class ControlJugador : MonoBehaviour
     public void Damage(float x)
     {
         life = life - x;
-        barraVida.fillAmount = life / 10f;
+        barraVidaUno.fillAmount = life / 10f;
+        barraVidaDos.fillAmount = life / 10f;
     }
 }
