@@ -36,7 +36,7 @@ public class Movimiento : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(enTierra);
+       
     }
     public void HMove()
     {
