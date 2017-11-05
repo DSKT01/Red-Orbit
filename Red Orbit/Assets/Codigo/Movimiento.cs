@@ -36,7 +36,7 @@ public class Movimiento : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(enTierra);
+
     }
     public void HMove()
     {
@@ -60,17 +60,11 @@ public class Movimiento : MonoBehaviour
         mTransform.up = new Vector3(0, 1, 0);
         
     }
-                                                                                //Pendiente: Separar cuerpo con cabeza/arma
+                                                                                
 
     public void Apuntar()
     {
-        //direccion del personaje dictada por el mouse
-
-        /*float distanciaECYP = Vector3.Distance(cTransform.position, mTransform.position);
-        Ray Rayo = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Vector3 ubicacionM = Rayo.GetPoint(distanciaECYP);
-        Vector3 puntero = new Vector3(ubicacionM.x, mTransform.position.y, ubicacionM.z);
-        mTransform.LookAt(puntero);*/
+        
         Transform dirApunte = GameObject.Find("Direccion").GetComponent<Transform>();
         mTransform.LookAt(dirApunte);
         
@@ -80,7 +74,7 @@ public class Movimiento : MonoBehaviour
 
     public void Salto()
     {
-        if (onCDSalto)                  //  Aquí no salta!
+        if (onCDSalto)                 
         {
             tD += Time.deltaTime;
             if (tD >= dashCD)
@@ -91,7 +85,7 @@ public class Movimiento : MonoBehaviour
         }
         if (!onCDSalto)
         {
-            if (Input.GetButtonDown("Salto"))       //  Aquí salta!
+            if (Input.GetButtonDown("Salto"))      
             {
                 float xD = Input.GetAxis("Horizontal");
                 float zD = Input.GetAxis("Vertical");
@@ -99,7 +93,7 @@ public class Movimiento : MonoBehaviour
                 Vector3 dirD;
                 if (zD == 0 && xD == 0)
                 {
-                    dirD = new Vector3(mTransform.forward.x, 1, mTransform.forward.z);
+                    dirD = new Vector3(mTransform.forward.x, 0, mTransform.forward.z);
                 }
                 else
                 {

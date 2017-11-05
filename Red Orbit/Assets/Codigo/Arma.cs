@@ -32,7 +32,7 @@ public class Arma : MonoBehaviour {
     float rotacion;
     Renderer mColor;
     Transform cTransform;
-
+    Transform puntero;
     AudioSource mAudio; 
     
 
@@ -53,6 +53,9 @@ public class Arma : MonoBehaviour {
 
         //sonidos:
         mAudio = GetComponent<AudioSource>();
+
+        //apuntar
+        puntero = GameObject.Find("Cursor").GetComponent<Transform>();
      
     }
 
@@ -114,12 +117,14 @@ public class Arma : MonoBehaviour {
 
     public void Apuntar()
     {
-        
+        /*
         float distanciaECYP = Vector3.Distance(cTransform.position, transform.position);
         Ray Rayo = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 ubicacionM = Rayo.GetPoint(distanciaECYP);
         Vector3 puntero = new Vector3(ubicacionM.x, transform.position.y, ubicacionM.z);
-        transform.LookAt(puntero);
+        */
+        Vector3 punteroM = new Vector3(puntero.position.x, transform.position.y, puntero.position.z);
+        transform.LookAt(punteroM);
 
         // Rotación en x.-------------------------------------------------------------------
 

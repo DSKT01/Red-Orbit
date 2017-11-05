@@ -13,6 +13,7 @@ public class ControlJugador : MonoBehaviour
     GameObject muerte;
     void Start()
     {
+        transform.forward = new Vector3(1, 0, 0);
         mMovimiento = GetComponent<Movimiento>();
         barraVidaUno = GameObject.Find("BarraR").GetComponent<Image>();
         barraVidaDos = GameObject.Find("BarraL").GetComponent<Image>();
@@ -20,27 +21,27 @@ public class ControlJugador : MonoBehaviour
         barraVidaUno.fillAmount = 1;
         barraVidaDos.fillAmount = 1;
         muerte = GameObject.Find("Muerte");
+
     }
 
 
     void Update()
     {
 
-        
-            mMovimiento.HMove();
-            //Pendiente: Separar cuerpo con cabeza/arma
-            mMovimiento.Apuntar();
-            mMovimiento.Salto();
-            arma.Disparar();
-            arma.Apuntar();
-       if (life <= 0)
+
+        mMovimiento.HMove();
+        mMovimiento.Apuntar();
+        mMovimiento.Salto();
+        arma.Disparar();
+        arma.Apuntar();
+        if (life <= 0)
         {
             Time.timeScale = 0;
             muerte.SetActive(true);
-            
+
         }
-        
-        
+
+
     }
     public void Damage(float x)
     {
