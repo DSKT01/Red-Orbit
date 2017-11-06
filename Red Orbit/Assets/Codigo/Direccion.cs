@@ -13,6 +13,7 @@ public class Direccion : MonoBehaviour
     {
         mTrasn = GetComponent<Transform>();
         jTrans = GameObject.Find("Jugador").GetComponent<Transform>();
+        lastPosition = new Vector3(1, 0, 0);
     }
 
     // Update is called once per frame
@@ -21,14 +22,14 @@ public class Direccion : MonoBehaviour
 
         if (Time.timeScale == 1)
         {
-           
+
             float dirH = Input.GetAxis("Horizontal");
             float dirV = Input.GetAxis("Vertical");
-            
+
             dirH = Redondear(dirH);
-           
+
             dirV = Redondear(dirV);
-            
+
             dir = new Vector3(dirH, 0, dirV);
             if ((dirH != 0) || (dirV != 0))
             {
@@ -42,10 +43,10 @@ public class Direccion : MonoBehaviour
 
     void Almacen()
     {
-       
-            lastPosition = dir;
-        
-        
+
+        lastPosition = dir;
+
+
     }
     int Redondear(float x)
     {
@@ -57,7 +58,7 @@ public class Direccion : MonoBehaviour
         {
             x = -1;
         }
-        
+
         return (int)x;
     }
 }

@@ -17,6 +17,7 @@ public class Movimiento : MonoBehaviour
     AudioSource mAudio;
     AudioClip aPasos, aSalto;
     bool enTierra = false;
+    
 
     void Start()
     {
@@ -69,6 +70,7 @@ public class Movimiento : MonoBehaviour
     {
         if (onCDSalto)                 
         {
+            
             tD += Time.deltaTime;
             if (tD >= dashCD)
             {
@@ -78,11 +80,12 @@ public class Movimiento : MonoBehaviour
         }
         if (!onCDSalto)
         {
+
             if (Input.GetButtonDown("Salto"))      
             {
                 float xD = Input.GetAxis("Horizontal");
                 float zD = Input.GetAxis("Vertical");
-
+         
                 Vector3 dirD;
                 if (zD == 0 && xD == 0)
                 {
@@ -96,8 +99,9 @@ public class Movimiento : MonoBehaviour
                 Vector3 fuerzaD = dirD * magD * senD;
                 mRigidbody.AddForce(fuerzaD);
 
-                onCDSalto = true;
+                
             }
+          
         }
 
     }
