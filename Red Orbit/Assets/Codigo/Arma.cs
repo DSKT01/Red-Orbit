@@ -4,135 +4,203 @@ using UnityEngine;
 
 public class Arma : MonoBehaviour {
 
-    /*  (Sé que no es necesario pero me gusta comentar cosas)
-     *  
-     *  NECESARIO PARA IMPLEMENTAR EL CODIGO:
-     *  1. El arma como tal a la que se le aplicará el componente (duuuh)
-     *  2. Referencia de la posición.
-     *  3. Objeto proyectil.
-     *  4. Debe existir una instancia del objeto proyectil escondida en algún lugar.  <---------- ¡IMPORTANTE!
-     */
-
-    /*  PENDIENTE:
-     *  1. Agregar daño al proyectil.
-     *  2. Hacer que la luz parpadee mientras recarga munición.
-     *  
-     */
-
-    [SerializeField]
-    float tRecarga;
-    float t;            // Tiempo de recarga.
-    [SerializeField]
-    Color colorArma;
-    [SerializeField]
-    int municion;
-    int m;              // Cantidad de balas que se pueden disparar.
-    [SerializeField]
-    bool recargando;
-    float rotacion;
-    Renderer mColor;
+    Renderer mRenderer;
+    Renderer[] partesBlancas;
     Transform cTransform;
-    Transform puntero;
-    AudioSource mAudio; 
-    
+    AudioSource mAudio;
+    public bool recargando;
+
+    //Piscina de objetos(Atributos).
+    GameObject[] piscina;
+    public GameObject[][] proyectiles;
+    public int proyActual = 0,                  //Tipo de proyectil actualmente seleccionado.
+        instancia = 0;                          //Instancia que se va a disparar del tipo de proyectil seleccionado.
+    int[] municiones;                           // Valores de la MUNICIÓN que cada proyectil tiene.
+    public int[] m;                             // A este se le restará la munición y al llegar a 0 se recuperará el valor con el arreglo anterior.
+    float[] tiempos;                            // Valores del TIEMPO DE RECARGA de cada proyectil.
+    public float[] t;                           // lo mismo que m pero respecto a los tiempos de recarga de cada proyectil. 
+
+    public Proyectil[] componentesDeProyectil;      // Aquí van los componentes proyectil de las balas.
+    public GameObject[] tiposDeProyectil;           // Los GameObjects a los que están vinculados los componentes.
+    public GameObject[] tipoSeleccionado;           // Las instancias de cada GameObject.
+    public GameObject instanciaSeleccionada;        // La instancia que se va a disparar.
 
     void Start() {
-        recargando = false;
-        colorArma = new Color(1, 0, 0);
-
-        m = municion;   //almacena el valor de la munición para que al recargar esta vuelva a llenarse.
-        t = tRecarga;   //almacena el tiempo que va a demorar la recarga.
-
-        mColor = GetComponent<Renderer>();
-        mColor.material.color = colorArma;
-
-        rotacion = transform.eulerAngles.x;
-
+        mRenderer = GetComponent<Renderer>();
+        partesBlancas = GameObject.Find("PartesBlancas").GetComponentsInChildren<Renderer>();
         // apuntar:
-        cTransform = GameObject.Find("PCamara").GetComponent<Transform>();
-
+        cTransform = GameObject.Find("Cursor").GetComponent<Transform>();
         //sonidos:
         mAudio = GetComponent<AudioSource>();
+                
+        componentesDeProyectil = GameObject.Find("BalasP").GetComponentsInChildren<Proyectil>();
+        tiposDeProyectil = new GameObject[componentesDeProyectil.Length];
+        proyectiles = new GameObject[componentesDeProyectil.Length][];
+        municiones = new int[tiposDeProyectil.Length];
+        m = new int[tiposDeProyectil.Length];
+        tiempos = new float[tiposDeProyectil.Length];
+        t = new float[tiposDeProyectil.Length];
 
-        //apuntar
-        puntero = GameObject.Find("Cursor").GetComponent<Transform>();
-     
+        for (int i = 0; i < componentesDeProyectil.Length; i++)     //obtener los gameobjects de los componentes y ponerlos en el arreglo: tiposDeProyectil.
+        {
+            tiposDeProyectil[i] = componentesDeProyectil[i].gameObject;
+        }
+
+        for (int i = 0; i < tiposDeProyectil.Length; i++)
+        {
+            proyectiles[i] = PiscinaDeObjetos(tiposDeProyectil[i], tiposDeProyectil[i].GetComponent<Proyectil>().municion);     //Instanciar cada bala.
+            municiones[i] = tiposDeProyectil[i].GetComponent<Proyectil>().municion;                                             //Tomar los valores de la munición.
+            tiempos[i] = tiposDeProyectil[i].GetComponent<Proyectil>().tiempoDeRecarga;                                         //Tomar los valores de los tiempos de recarga.
+            m[i] = municiones[i];                                                                                               //igualar m a municiones.
+            t[i] = tiempos[i];
+        }
+
+        
+        
+        for (int i = 0; i < municiones.Length; i++)
+        {
+            partesBlancas[i].material.color = tiposDeProyectil[proyActual].GetComponent<Proyectil>().color;
+        }
     }
 
     void Update() {
 
+        tipoSeleccionado = proyectiles[proyActual];             // Tipo de proyectil.
+        instanciaSeleccionada = tipoSeleccionado[instancia];    // Cuál de los proyectiles instanciados se va a disparar.
+        
+    }
+
+    public void CambiarArma()
+    {
+        if (proyActual < 0)
+            proyActual = proyectiles.Length - 1;
+
+        if (proyActual > proyectiles.Length - 1)
+            proyActual = 0;
+        for (int i = 0; i < partesBlancas.Length; i++)
+        {
+            partesBlancas[i].material.color = tiposDeProyectil[proyActual].GetComponent<Proyectil>().color;
+        }
+        
+
+        if (!recargando)
+        {
+            if (Input.GetKeyDown("e"))
+            {
+                proyActual++;
+                instancia = 0;
+                t[proyActual] = tiempos[proyActual];     // Actualizar tiempo de recarga;
+            }
+
+            if (Input.GetKeyDown("q"))
+            {
+                proyActual--;
+                instancia = 0;
+                t[proyActual] = tiempos[proyActual];     // Actualizar tiempo de recarga;
+            }    
+        }
+    }
+
+    public void Disparar(GameObject _proyectil)
+    {
+        Transform tRef = GameObject.Find("Referencia").GetComponent<Transform>();
+        Transform proyTrans = _proyectil.GetComponent<Transform>();
+        Proyectil proyProy = _proyectil.GetComponent<Proyectil>();
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            if (!recargando)
+            {
+                if (proyProy.disparable)
+                {
+                    instancia++;
+                    proyProy.disparable = false;
+                    proyProy.enPiscina = false;
+
+                    Rigidbody cuerpoProyectil = _proyectil.GetComponent<Rigidbody>();
+                    Vector3 pos = tRef.position;
+
+                    cuerpoProyectil.velocity = new Vector3(0, 0, 0);    //eliminar el movimiento que tenía antes la bala.
+                    proyTrans.position = pos;
+                    cuerpoProyectil.AddForce(tRef.forward * proyProy.magnitudDeDisparo);
+                }
+            }
+        }
+        
+        if (instancia < 0)
+            instancia = tipoSeleccionado.Length - 1;
+        if (instancia > tipoSeleccionado.Length - 1)
+            instancia = 0;        
+    }
+
+    public bool Recargar()
+    {
+        if (proyActual < 0)
+            proyActual = proyectiles.Length - 1;
+
+        if (proyActual > proyectiles.Length - 1)
+            proyActual = 0;
+
+        if (Input.GetButtonDown("Fire1"))
+            m[proyActual]--;
+
+        if (m[proyActual] <= 0)
+        {
+            recargando = true;
+            t[proyActual] -= Time.deltaTime;
+            m[proyActual] = 0;
+
+            if (t[proyActual] <= 0)
+            {
+                m[proyActual] = municiones[proyActual];
+                recargando = false;
+                t[proyActual] = tiempos[proyActual];
+            }
+        }
+
+        return recargando;
     }
 
     /// <summary>
-    /// Incluye recarga
+    /// Modifica la rotación del arma para que siempre apunte hacia el puntero.
     /// </summary>
-    public void Disparar()
-    {
-        GameObject proyectil, pClon;
-        Transform trRef = transform.Find("Referencia").GetComponent<Transform>();
-        Vector3 pos = trRef.position;   // Obtener posición de la referencia.
-
-        if (Input.GetButtonDown("Fire1"))   // instanciar el proyectil.
-        {
-            if (!recargando && Time.timeScale == 1)    // Si no está recargando y el tiempo está corriendo.
-            {
-                proyectil = GameObject.Find("Proyectil");
-                pClon = Instantiate(proyectil, pos, Quaternion.identity);
-                Proyectil p = pClon.GetComponent<Proyectil>();    //  <---- Componente proyectil del clon.
-                p.disparado = true;
-
-                mColor.material.color -= colorArma / m;
-                mAudio.Play();
-
-                municion--;
-            }
-        }
-
-        #region Recargar
-        if (tRecarga < t)
-        {
-           
-            recargando = true;
-            tRecarga -= Time.deltaTime;
-
-            if (tRecarga < 0)
-            {
-                recargando = false;
-                municion = m;   // La munición vuelve a llenarse.
-                tRecarga = t;   // Se reinicia el cooldown.
-                mColor.material.color = colorArma;     // Se reinicia la intensidad de la luz.
-            }
-        }
-
-        if (municion == 0)  // Recargar alahu akhbar las balas. (leer rápido)
-            tRecarga -= 0.001f;
-
-        if (Input.GetButtonUp("Fire2"))   // Recargar manualmente (POR AHORA CON EL CLIC DERECHO)
-        {
-            if (municion < m)             // No puede recargar si tiene toda la munición.
-                tRecarga -= 1.0f;           // si recarga antes de que las balas se le acaben tardará menos tiempo en recargar.
-        }
-        #endregion
-    }
-
     public void Apuntar()
     {
-        /*
-        float distanciaECYP = Vector3.Distance(cTransform.position, transform.position);
-        Ray Rayo = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Vector3 ubicacionM = Rayo.GetPoint(distanciaECYP);
+
+
+        Vector3 ubicacionM = cTransform.position;
         Vector3 puntero = new Vector3(ubicacionM.x, transform.position.y, ubicacionM.z);
-        */
-        Vector3 punteroM = new Vector3(puntero.position.x, transform.position.y, puntero.position.z);
-        transform.LookAt(punteroM);
+        transform.LookAt(puntero);
 
-        // Rotación en x.-------------------------------------------------------------------
+        //inclinación en x.
+        if (tiposDeProyectil[proyActual].GetComponent<Proyectil>().usaInclinación)
+        {
+            float distanciaJyP = Vector3.Distance(transform.position, puntero);
+            float a = -distanciaJyP / 2;
+            Vector3 giro = new Vector3(a, 0, 0);
 
-        /*float distanciaJyP = Vector3.Distance(transform.position, puntero);
-        float a = -distanciaJyP/4;
-        Vector3 giro = new Vector3(a, 0, 0);
-
-        transform.eulerAngles += giro;*/
+            transform.eulerAngles += giro;
+        }
     }
 
+    /// <summary>
+    /// Crea una piscina de objetos con una cantidad específica de éstos. (Ponerlo en el Start).
+    /// </summary>
+    /// <param name="_obj"></param> Objeto que se quiere instanciar.
+    /// <param name="_municion"></param> Cuántas instancias se quieren de este objeto.
+    GameObject[] PiscinaDeObjetos(GameObject _obj, int _cantidad)
+    {
+        piscina = new GameObject[_cantidad];
+
+        Proyectil proyectil = _obj.GetComponent<Proyectil>();
+        Transform _objTrans = _obj.GetComponent<Transform>();
+
+        for (int i = 0; i < piscina.Length; i++)    // Llenar los puestos del arreglo con Instancias de la Bala.
+        {
+            Vector3 pos = new Vector3(_objTrans.position.x, _objTrans.position.y + 1.0f * (i + 1f), _objTrans.position.z);
+            piscina[i] = GameObject.Instantiate(_obj, pos, transform.rotation);
+        }
+
+        return piscina;
+    }
 }

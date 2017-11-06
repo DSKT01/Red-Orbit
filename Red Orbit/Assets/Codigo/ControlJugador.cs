@@ -28,17 +28,21 @@ public class ControlJugador : MonoBehaviour
     void Update()
     {
 
-
-        mMovimiento.HMove();
-        mMovimiento.Apuntar();
-        mMovimiento.Salto();
-        arma.Disparar();
-        arma.Apuntar();
+        if (Time.timeScale == 1)
+        {
+            mMovimiento.HMove();
+            mMovimiento.Apuntar();
+            mMovimiento.Salto();
+            arma.Disparar(arma.instanciaSeleccionada);
+            arma.Recargar();
+            arma.CambiarArma();
+            arma.Apuntar();
+        }
+        
         if (life <= 0)
         {
             Time.timeScale = 0;
             muerte.SetActive(true);
-
         }
 
 

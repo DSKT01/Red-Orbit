@@ -4,73 +4,61 @@ using UnityEngine;
 
 public class Proyectil : MonoBehaviour
 {
+    public float daño;
+    public float magnitudDeDisparo;
+    public int municion;
+    public bool disparable = true;
+    public bool usaInclinación = false;
+    public float tiempoDeRecarga;
+    public float duracionEnElCampo;
+    float cont;
+    public bool enPiscina = true;
 
-    /*LAS BALAS SE DESTRUIRÁN DESPUES DE 3 SEGUNDOS DE HABER TOCADO EL PISO, LUEGO CUANDO 
-     *HABLEMOS DE DIFERENTES TIPOS DE PROYECTILES CAMBIAMOS LO QUE SEA NECESARIO.
-     */
-
-    [SerializeField]
-    float magnitud;     // Fuerza de lanzamiento de la bala.
-
+    Renderer mRenderer;
+    public Color color;
     Rigidbody mCuerpo;
-    Transform trArma;   // Toma el transform del arma para que la dirección del lanzamiento sea a la cual se está apuntando.
-
-    [SerializeField]
-    float duración, contador;       // Tiempo para que la bala desaparesca.
-
-    public bool disparado;
-    bool colisiono;     // Si colisionó o no contra el piso.
-
-    AudioSource mAudio;
-
-    // Use this for initialization
+    public Vector3 posicionOriginal;       
+    public Quaternion rotacionOriginal;
+ 
     void Start()
     {
+        mRenderer = GetComponent<Renderer>();
+        posicionOriginal = transform.position;  // Guardar las rotaciones y posiciones en que se crearon.
+        rotacionOriginal = transform.rotation;
 
-        //Salir disparadas al ser creadas.
         mCuerpo = GetComponent<Rigidbody>();
-        trArma = GameObject.Find("ArmaCube").GetComponent<Transform>();  // CAMBIAR ARMACUBE POR EL NOMBRE DEL ARMA
-
-        mCuerpo.AddForce(trArma.forward * magnitud);   //salir disparado.
-
-        colisiono = false;
-
-        mAudio = GetComponent<AudioSource>();
-
+        mCuerpo.Sleep();
+        cont = duracionEnElCampo;
+        mRenderer.material.color = color;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        Destruirse();
+        reaparecer();
+        if (enPiscina)
+            transform.position = posicionOriginal;
     }
 
-    void OnCollisionEnter(Collision _piso)
+    public void reaparecer()
     {
-        GameObject piso = _piso.gameObject;
-        if (piso.tag == "Terreno")
+        if (!disparable)
         {
-            Destroy(this.gameObject);
-        }
-        if (piso.tag == "Enemigo")
-        {
-            
-            Destroy(this.gameObject);
+            duracionEnElCampo -= Time.deltaTime;
+            if (duracionEnElCampo <= 0)
+            {
+                disparable = true;
+                transform.position = posicionOriginal;
+                transform.rotation = rotacionOriginal;
+                mCuerpo.velocity = new Vector3(0, 0, 0);
+                duracionEnElCampo = cont;
+                mCuerpo.Sleep();    // Dormir para evitar el caos en la piscina de objetos.
+                enPiscina = true;
+            }
         }
     }
 
-    void Destruirse()
+    void OnCollisionEnter(Collision _x)
     {
-        if (disparado == true)
-        {
-
-            contador += Time.deltaTime;
-
-            if (contador > duración)
-                Destroy(this.gameObject);
-            
-        }
-
 
     }
 }

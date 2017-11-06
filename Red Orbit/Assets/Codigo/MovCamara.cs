@@ -34,7 +34,7 @@ public class MovCamara : MonoBehaviour
     {
         
         Vector3 posi = (pTrans.position + jTrans.position) / 2;
-        Vector3 posiF = new Vector3(posi.x, jTrans.position.y + 9.9f, posi.z - 6.88f);
+        Vector3 posiF = new Vector3(posi.x, jTrans.position.y + 10, posi.z - 10f);
         float x = ((Vector3.Distance(transform.position, posiF)) / 2) * 30f * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, posiF, x);
         /*

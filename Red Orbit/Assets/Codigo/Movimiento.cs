@@ -11,13 +11,9 @@ public class Movimiento : MonoBehaviour
     float magD;
     Transform mTransform;
     Rigidbody mRigidbody;
-    Transform cTransform;
     public float dashCD;
     bool onCDSalto = false;     
     float tD = 0f;
-    Transform aTransform;
-    Vector3 dirMov;
-
     AudioSource mAudio;
     AudioClip aPasos, aSalto;
     bool enTierra = false;
@@ -26,9 +22,6 @@ public class Movimiento : MonoBehaviour
     {
         mTransform = GetComponent<Transform>();
         mRigidbody = GetComponent<Rigidbody>();
-        cTransform = GameObject.Find("PCamara").GetComponent<Transform>();
-        aTransform = GameObject.Find("ArmaCube").GetComponent<Transform>();
-
         mAudio = GetComponent<AudioSource>();
         aPasos = Resources.Load("Audios/Pasos") as AudioClip;
         aSalto = Resources.Load("Audios/Salto") as AudioClip;
@@ -134,10 +127,7 @@ public class Movimiento : MonoBehaviour
         }
         #endregion
 
-        if (!enTierra)
-        {
-            
-        }
+
     }
 
     void OnCollisionEnter (Collision _colision)

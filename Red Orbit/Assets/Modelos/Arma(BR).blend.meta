@@ -1,0 +1,131 @@
+fileFormatVersion: 2
+guid: 4a226d5f2beb16f4f81ffe57820a8874
+timeCreated: 1509922392
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Ca_on_intrno
+    100004: Cosa_brillante_1
+    100006: Cosa_brillante_2
+    100008: Cosa_brillante_3
+    100010: Cuerpo
+    100012: Cuerpo_001
+    100014: Cuerpo_002
+    100016: Gatillo__Brilla_
+    100018: Handle_Back
+    100020: Handle_Front
+    400000: //RootNode
+    400002: Ca_on_intrno
+    400004: Cosa_brillante_1
+    400006: Cosa_brillante_2
+    400008: Cosa_brillante_3
+    400010: Cuerpo
+    400012: Cuerpo_001
+    400014: Cuerpo_002
+    400016: Gatillo__Brilla_
+    400018: Handle_Back
+    400020: Handle_Front
+    2300000: Ca_on_intrno
+    2300002: Cosa_brillante_1
+    2300004: Cosa_brillante_2
+    2300006: Cosa_brillante_3
+    2300008: Cuerpo
+    2300010: Cuerpo_001
+    2300012: Cuerpo_002
+    2300014: Gatillo__Brilla_
+    2300016: Handle_Back
+    2300018: Handle_Front
+    3300000: Ca_on_intrno
+    3300002: Cosa_brillante_1
+    3300004: Cosa_brillante_2
+    3300006: Cosa_brillante_3
+    3300008: Cuerpo
+    3300010: Cuerpo_001
+    3300012: Cuerpo_002
+    3300014: Gatillo__Brilla_
+    3300016: Handle_Back
+    3300018: Handle_Front
+    4300000: Cuerpo_002
+    4300002: Cuerpo_001
+    4300004: Cosa_brillante_3
+    4300006: Cosa_brillante_2
+    4300008: Cosa_brillante_1
+    4300010: Gatillo__Brilla_
+    4300012: Handle_Back
+    4300014: Handle_Front
+    4300016: Cuerpo
+    4300018: Ca_on_intrno
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
