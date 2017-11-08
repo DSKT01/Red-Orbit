@@ -9,6 +9,9 @@ public class ControlAnimador : MonoBehaviour
     [SerializeField]
     Transform targetR, targetL, cursor, direccion;
     Movimiento mMov;
+    Vector3 actualPosition, lastPosition, delta;
+    float actualPositionY, lastPositionY, deltaY;
+    
     // Use this for initialization
     void Start()
     {
@@ -19,10 +22,27 @@ public class ControlAnimador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //change
-        Comparar();
-        anim.SetBool("Dash" , Input.GetButtonDown("Salto"));
-        
+        anim.SetBool("Dir", Comparar());
+        actualPositionY = transform.position.y;
+        deltaY = Math.Abs (actualPositionY - lastPositionY);
+        actualPosition = new Vector3(transform.position.x, 0, transform.position.z);
+        delta = new Vector3(( Mathf.Ceil(Math.Abs((actualPosition.x * 2) - lastPosition.x))), 0, (Mathf.Ceil(Math.Abs(actualPosition.z * 2) - lastPosition.z)));
+        if (deltaY == 0)
+        {
+            anim.SetInteger("Velocity", (int)(delta.x + delta.z));
+        }
+        else
+        {
+            anim.SetInteger("Velocity", 0);
+        }
+       // Debug.Log(delta);
+        anim.SetBool("Dash", mMov.animacion);
+    }
+    void LateUpdate()
+    {
+        Almacen();
     }
     void OnAnimatorIK()
     {
@@ -38,6 +58,11 @@ public class ControlAnimador : MonoBehaviour
         anim.SetIKRotation(AvatarIKGoal.RightHand, targetR.rotation);
         anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
         anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+    }
+    void Almacen()
+    {
+        lastPosition = actualPosition;
+        lastPositionY = actualPositionY;
     }
     bool Comparar()
     {
@@ -64,9 +89,10 @@ public class ControlAnimador : MonoBehaviour
             {
                 dir = false;
             }
+            
         }
     
-        //Debug.Log(dir);
+       // Debug.Log(dir);
        
         return dir;
     }

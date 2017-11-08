@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arma : MonoBehaviour {
+public class Arma : MonoBehaviour
+{
 
     Renderer mRenderer;
     Renderer[] partesBlancas;
@@ -25,14 +26,15 @@ public class Arma : MonoBehaviour {
     public GameObject[] tipoSeleccionado;           // Las instancias de cada GameObject.
     public GameObject instanciaSeleccionada;        // La instancia que se va a disparar.
 
-    void Start() {
+    void Start()
+    {
         mRenderer = GetComponent<Renderer>();
         partesBlancas = GameObject.Find("PartesBlancas").GetComponentsInChildren<Renderer>();
         // apuntar:
         cTransform = GameObject.Find("Cursor").GetComponent<Transform>();
         //sonidos:
         mAudio = GetComponent<AudioSource>();
-                
+
         componentesDeProyectil = GameObject.Find("BalasP").GetComponentsInChildren<Proyectil>();
         tiposDeProyectil = new GameObject[componentesDeProyectil.Length];
         proyectiles = new GameObject[componentesDeProyectil.Length][];
@@ -55,19 +57,20 @@ public class Arma : MonoBehaviour {
             t[i] = tiempos[i];
         }
 
-        
-        
+
+
         for (int i = 0; i < municiones.Length; i++)
         {
             partesBlancas[i].material.color = tiposDeProyectil[proyActual].GetComponent<Proyectil>().color;
         }
     }
 
-    void Update() {
+    void Update()
+    {
 
         tipoSeleccionado = proyectiles[proyActual];             // Tipo de proyectil.
         instanciaSeleccionada = tipoSeleccionado[instancia];    // Cuál de los proyectiles instanciados se va a disparar.
-        
+
     }
 
     public void CambiarArma()
@@ -81,7 +84,7 @@ public class Arma : MonoBehaviour {
         {
             partesBlancas[i].material.color = tiposDeProyectil[proyActual].GetComponent<Proyectil>().color;
         }
-        
+
 
         if (!recargando)
         {
@@ -97,7 +100,7 @@ public class Arma : MonoBehaviour {
                 proyActual--;
                 instancia = 0;
                 t[proyActual] = tiempos[proyActual];     // Actualizar tiempo de recarga;
-            }    
+            }
         }
     }
 
@@ -106,9 +109,11 @@ public class Arma : MonoBehaviour {
         Transform tRef = GameObject.Find("Referencia").GetComponent<Transform>();
         Transform proyTrans = _proyectil.GetComponent<Transform>();
         Proyectil proyProy = _proyectil.GetComponent<Proyectil>();
+        Vector3 pos = tRef.position;
 
         if (Input.GetButtonDown("Fire1"))
         {
+
             if (!recargando)
             {
                 if (proyProy.disparable)
@@ -118,19 +123,19 @@ public class Arma : MonoBehaviour {
                     proyProy.enPiscina = false;
 
                     Rigidbody cuerpoProyectil = _proyectil.GetComponent<Rigidbody>();
-                    Vector3 pos = tRef.position;
-
+                    
+                    Debug.Log(pos + " " + tRef.name);
                     cuerpoProyectil.velocity = new Vector3(0, 0, 0);    //eliminar el movimiento que tenía antes la bala.
                     proyTrans.position = pos;
                     cuerpoProyectil.AddForce(tRef.forward * proyProy.magnitudDeDisparo);
                 }
             }
         }
-        
+
         if (instancia < 0)
             instancia = tipoSeleccionado.Length - 1;
         if (instancia > tipoSeleccionado.Length - 1)
-            instancia = 0;        
+            instancia = 0;
     }
 
     public bool Recargar()

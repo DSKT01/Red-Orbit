@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movimiento : MonoBehaviour
 {
-  
+
     [SerializeField]
     float mag;
     [SerializeField]
@@ -12,12 +12,12 @@ public class Movimiento : MonoBehaviour
     Transform mTransform;
     Rigidbody mRigidbody;
     public float dashCD;
-    bool onCDSalto = false;     
+    bool onCDSalto = false;
     float tD = 0f;
     AudioSource mAudio;
     AudioClip aPasos, aSalto;
     bool enTierra = false;
-    
+    public bool animacion = false;
 
     void Start()
     {
@@ -83,6 +83,7 @@ public class Movimiento : MonoBehaviour
 
             if (Input.GetButtonDown("Salto"))      
             {
+                animacion = true;
                 float xD = Input.GetAxis("Horizontal");
                 float zD = Input.GetAxis("Vertical");
          
@@ -98,8 +99,12 @@ public class Movimiento : MonoBehaviour
                 float senD = 1f;
                 Vector3 fuerzaD = dirD * magD * senD;
                 mRigidbody.AddForce(fuerzaD);
+                onCDSalto = true; 
 
-                
+            }
+            else
+            {
+                animacion = false;
             }
           
         }
@@ -146,9 +151,11 @@ public class Movimiento : MonoBehaviour
         if (objeto.tag == "Terreno")
         {
             enTierra = false;
+            /*
             mAudio.clip = aSalto;
             mAudio.loop = false;
             mAudio.Play();
+            */
         }
             
 

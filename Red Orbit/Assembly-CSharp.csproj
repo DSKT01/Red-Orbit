@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Codigo\Arma.cs" />
+     <Compile Include="Assets\Codigo\ArmaFixMov.cs" />
      <Compile Include="Assets\Codigo\ControlAnimador.cs" />
      <Compile Include="Assets\Codigo\ControlCursor.cs" />
      <Compile Include="Assets\Codigo\ControlJugador.cs" />
