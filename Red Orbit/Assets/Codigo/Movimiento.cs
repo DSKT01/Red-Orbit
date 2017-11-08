@@ -70,7 +70,7 @@ public class Movimiento : MonoBehaviour
     {
         if (onCDSalto)                 
         {
-            
+            animacion = false;
             tD += Time.deltaTime;
             if (tD >= dashCD)
             {
@@ -80,7 +80,7 @@ public class Movimiento : MonoBehaviour
         }
         if (!onCDSalto)
         {
-
+             
             if (Input.GetButtonDown("Salto"))      
             {
                 animacion = true;
@@ -100,12 +100,8 @@ public class Movimiento : MonoBehaviour
                 Vector3 fuerzaD = dirD * magD * senD;
                 mRigidbody.AddForce(fuerzaD);
                 onCDSalto = true; 
+            } 
 
-            }
-            else
-            {
-                animacion = false;
-            }
           
         }
 

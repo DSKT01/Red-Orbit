@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Proyectil : MonoBehaviour
 {
+    public bool comprado = true;
     public float daño;
     public float magnitudDeDisparo;
     public int municion;
     public bool disparable = true;
     public bool usaInclinación = false;
     public float tiempoDeRecarga;
-    public float duracionEnElCampo;
-    float cont;
+
     public bool enPiscina = true;
 
+    Transform cTrans;
+    Vector3 vectorcito;
     Renderer mRenderer;
     public Color color;
     Rigidbody mCuerpo;
@@ -22,42 +24,22 @@ public class Proyectil : MonoBehaviour
  
     void Start()
     {
+        cTrans = GameObject.Find("PCamara").GetComponent<Transform>();
+        vectorcito = Vector3.Cross(cTrans.forward, cTrans.right);
         mRenderer = GetComponent<Renderer>();
         posicionOriginal = transform.position;  // Guardar las rotaciones y posiciones en que se crearon.
         rotacionOriginal = transform.rotation;
 
         mCuerpo = GetComponent<Rigidbody>();
         mCuerpo.Sleep();
-        cont = duracionEnElCampo;
-        mRenderer.material.color = color;
     }
     
     void Update()
     {
-        reaparecer();
-        if (enPiscina)
-            transform.position = posicionOriginal;
+        transform.LookAt(Camera.main.transform.position, cTrans.up);
     }
 
-    public void reaparecer()
-    {
-        if (!disparable)
-        {
-            duracionEnElCampo -= Time.deltaTime;
-            if (duracionEnElCampo <= 0)
-            {
-                disparable = true;
-                transform.position = posicionOriginal;
-                transform.rotation = rotacionOriginal;
-                mCuerpo.velocity = new Vector3(0, 0, 0);
-                duracionEnElCampo = cont;
-                mCuerpo.Sleep();    // Dormir para evitar el caos en la piscina de objetos.
-                enPiscina = true;
-            }
-        }
-    }
-
-    void OnCollisionEnter(Collision _x)
+    void producto()
     {
 
     }

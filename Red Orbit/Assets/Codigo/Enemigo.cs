@@ -18,7 +18,8 @@ public class Enemigo : MonoBehaviour
     public float daño = 1f;
     public float distanciaDe = 0f;
     bool c = true;
-    ControlNiveles control;
+    Variables variables;
+    
 
     AudioSource mAudio;
     AudioClip[] aQuejidos;
@@ -27,10 +28,11 @@ public class Enemigo : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        variables = GameObject.Find("Variables").GetComponent<Variables>();
         agente = GetComponent<NavMeshAgent>();
         target = GameObject.Find("Jugador").GetComponent<Transform>();
         mTransform = GetComponent<Transform>();
-        control = GameObject.Find("Nivel").GetComponent<ControlNiveles>();
+        
 
         mAudio = GetComponent<AudioSource>();
         aQuejidos = new AudioClip[] {Resources.Load("Audios/QuejidoEnemigo01") as AudioClip, 
@@ -43,6 +45,7 @@ public class Enemigo : MonoBehaviour
     void Update()
 
     {
+        
         if (activo)
         {
             if (!siguiendo)
@@ -59,17 +62,13 @@ public class Enemigo : MonoBehaviour
                 agente.SetDestination(target.position);
                 agente.speed = velocidad;
                 agente.stoppingDistance = distanciaDe;
-                transform.LookAt(new Vector3(target.position.x, mTransform.position.y + 3, target.position.z));
+                transform.LookAt(new Vector3(target.position.x, mTransform.position.y, target.position.z));
             }
             if (lifeE <= 0)
             {
-                
-                if (c)
-                {
-                    control.contador++;
-                    c = false;
-                }
-                Destroy(this.gameObject, 0.2f);
+                variables.muertes++;
+                variables.monedas += ((Random.Range(5, 15)) * variables.mMonedas);
+                Destroy(this.gameObject);
                 
             }
         }
@@ -79,6 +78,7 @@ public class Enemigo : MonoBehaviour
     void OnCollisionEnter(Collision x)
     {
         GameObject objeto = x.gameObject;
+
         if (objeto.tag == "Player")
         {
             ControlJugador cj = objeto.GetComponent<ControlJugador>();
@@ -92,10 +92,8 @@ public class Enemigo : MonoBehaviour
         
         if (objeto.tag == "Bala")
         {
-            Damage(1);
-            
-
-                  
+            Proyectil magDamage = objeto.GetComponent<Proyectil>();
+            Damage(magDamage.daño);      
         }
         
 

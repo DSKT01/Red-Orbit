@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arma : MonoBehaviour
-{
+public class Arma : MonoBehaviour {
 
-    Renderer mRenderer;
     Renderer[] partesBlancas;
     Transform cTransform;
     AudioSource mAudio;
     public bool recargando;
-
+   
     //Piscina de objetos(Atributos).
     GameObject[] piscina;
     public GameObject[][] proyectiles;
@@ -26,15 +24,13 @@ public class Arma : MonoBehaviour
     public GameObject[] tipoSeleccionado;           // Las instancias de cada GameObject.
     public GameObject instanciaSeleccionada;        // La instancia que se va a disparar.
 
-    void Start()
-    {
-        mRenderer = GetComponent<Renderer>();
+    void Start() {
         partesBlancas = GameObject.Find("PartesBlancas").GetComponentsInChildren<Renderer>();
         // apuntar:
         cTransform = GameObject.Find("Cursor").GetComponent<Transform>();
         //sonidos:
         mAudio = GetComponent<AudioSource>();
-
+                
         componentesDeProyectil = GameObject.Find("BalasP").GetComponentsInChildren<Proyectil>();
         tiposDeProyectil = new GameObject[componentesDeProyectil.Length];
         proyectiles = new GameObject[componentesDeProyectil.Length][];
@@ -45,7 +41,8 @@ public class Arma : MonoBehaviour
 
         for (int i = 0; i < componentesDeProyectil.Length; i++)     //obtener los gameobjects de los componentes y ponerlos en el arreglo: tiposDeProyectil.
         {
-            tiposDeProyectil[i] = componentesDeProyectil[i].gameObject;
+            if(componentesDeProyectil[i].comprado)
+                tiposDeProyectil[i] = componentesDeProyectil[i].gameObject;
         }
 
         for (int i = 0; i < tiposDeProyectil.Length; i++)
@@ -57,19 +54,19 @@ public class Arma : MonoBehaviour
             t[i] = tiempos[i];
         }
 
-
-
-        for (int i = 0; i < municiones.Length; i++)
+        for (int i = 0; i < partesBlancas.Length; i++)
         {
             partesBlancas[i].material.color = tiposDeProyectil[proyActual].GetComponent<Proyectil>().color;
         }
+
     }
 
-    void Update()
-    {
+    void Update() {
 
         tipoSeleccionado = proyectiles[proyActual];             // Tipo de proyectil.
         instanciaSeleccionada = tipoSeleccionado[instancia];    // Cuál de los proyectiles instanciados se va a disparar.
+
+
 
     }
 
@@ -80,27 +77,34 @@ public class Arma : MonoBehaviour
 
         if (proyActual > proyectiles.Length - 1)
             proyActual = 0;
-        for (int i = 0; i < partesBlancas.Length; i++)
+
+       for (int i = 0; i < partesBlancas.Length; i++)
         {
+            
             partesBlancas[i].material.color = tiposDeProyectil[proyActual].GetComponent<Proyectil>().color;
         }
-
 
         if (!recargando)
         {
             if (Input.GetKeyDown("e"))
             {
-                proyActual++;
+                if (proyActual == proyectiles.Length - 1)
+                    proyActual = 0;
+                else
+                    proyActual++;
                 instancia = 0;
                 t[proyActual] = tiempos[proyActual];     // Actualizar tiempo de recarga;
             }
 
             if (Input.GetKeyDown("q"))
             {
-                proyActual--;
+                if (proyActual == 0)
+                    proyActual = proyectiles.Length - 1;
+                else
+                    proyActual--;
                 instancia = 0;
                 t[proyActual] = tiempos[proyActual];     // Actualizar tiempo de recarga;
-            }
+            }    
         }
     }
 
@@ -109,45 +113,41 @@ public class Arma : MonoBehaviour
         Transform tRef = GameObject.Find("Referencia").GetComponent<Transform>();
         Transform proyTrans = _proyectil.GetComponent<Transform>();
         Proyectil proyProy = _proyectil.GetComponent<Proyectil>();
-        Vector3 pos = tRef.position;
 
         if (Input.GetButtonDown("Fire1"))
         {
-
             if (!recargando)
             {
                 if (proyProy.disparable)
                 {
-                    instancia++;
+                    if(instancia >= 0)
+                        instancia++;
+                    if (instancia == tipoSeleccionado.Length)
+                        instancia = 0;
+
                     proyProy.disparable = false;
                     proyProy.enPiscina = false;
 
                     Rigidbody cuerpoProyectil = _proyectil.GetComponent<Rigidbody>();
-                    
-                    Debug.Log(pos + " " + tRef.name);
+                    Vector3 pos = tRef.position;
                     cuerpoProyectil.velocity = new Vector3(0, 0, 0);    //eliminar el movimiento que tenía antes la bala.
                     proyTrans.position = pos;
                     cuerpoProyectil.AddForce(tRef.forward * proyProy.magnitudDeDisparo);
                 }
             }
-        }
-
-        if (instancia < 0)
-            instancia = tipoSeleccionado.Length - 1;
-        if (instancia > tipoSeleccionado.Length - 1)
-            instancia = 0;
+        }             
     }
 
     public bool Recargar()
-    {
-        if (proyActual < 0)
-            proyActual = proyectiles.Length - 1;
-
-        if (proyActual > proyectiles.Length - 1)
-            proyActual = 0;
-
+    {        
         if (Input.GetButtonDown("Fire1"))
-            m[proyActual]--;
+        {
+            if (tiposDeProyectil[proyActual].GetComponent<Proyectil>().enPiscina)
+            {
+                m[proyActual]--;
+            }
+        }
+            
 
         if (m[proyActual] <= 0)
         {
@@ -172,19 +172,24 @@ public class Arma : MonoBehaviour
     public void Apuntar()
     {
 
-
         Vector3 ubicacionM = cTransform.position;
         Vector3 puntero = new Vector3(ubicacionM.x, transform.position.y, ubicacionM.z);
-        transform.LookAt(puntero);
+        //transform.LookAt(puntero);
 
         //inclinación en x.
         if (tiposDeProyectil[proyActual].GetComponent<Proyectil>().usaInclinación)
         {
             float distanciaJyP = Vector3.Distance(transform.position, puntero);
-            float a = -distanciaJyP / 2;
+            float a = -distanciaJyP;
             Vector3 giro = new Vector3(a, 0, 0);
 
             transform.eulerAngles += giro;
+
+            /*  CAMBIO DE MAGNITUD SEGÚN LA DISTANCIA (NO ES EXACTO)
+            float m = Mathf.Round(distanciaJyP) * 35;
+            instanciaSeleccionada.GetComponent<Proyectil>().magnitudDeDisparo = m;
+            Debug.Log(Mathf.Round(distanciaJyP));
+            */
         }
     }
 

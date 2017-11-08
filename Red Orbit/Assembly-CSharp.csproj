@@ -48,18 +48,33 @@
   <ItemGroup>
      <Compile Include="Assets\Codigo\Arma.cs" />
      <Compile Include="Assets\Codigo\ArmaFixMov.cs" />
+     <Compile Include="Assets\Codigo\Armas.cs" />
+     <Compile Include="Assets\Codigo\AumentoVid.cs" />
+     <Compile Include="Assets\Codigo\Boss.cs" />
      <Compile Include="Assets\Codigo\ControlAnimador.cs" />
      <Compile Include="Assets\Codigo\ControlCursor.cs" />
      <Compile Include="Assets\Codigo\ControlJugador.cs" />
      <Compile Include="Assets\Codigo\ControlLuces.cs" />
      <Compile Include="Assets\Codigo\ControlNiveles.cs" />
+     <Compile Include="Assets\Codigo\Dash.cs" />
      <Compile Include="Assets\Codigo\Direccion.cs" />
      <Compile Include="Assets\Codigo\Enemigo.cs" />
+     <Compile Include="Assets\Codigo\Espawn.cs" />
      <Compile Include="Assets\Codigo\MenuPrincipal.cs" />
      <Compile Include="Assets\Codigo\MovCamara.cs" />
      <Compile Include="Assets\Codigo\Movimiento.cs" />
+     <Compile Include="Assets\Codigo\MultMon.cs" />
+     <Compile Include="Assets\Codigo\Permanente.cs" />
      <Compile Include="Assets\Codigo\PlanetRotation.cs" />
+     <Compile Include="Assets\Codigo\PropGatos.cs" />
+     <Compile Include="Assets\Codigo\PropLaser.cs" />
      <Compile Include="Assets\Codigo\Proyectil.cs" />
+     <Compile Include="Assets\Codigo\Referencia.cs" />
+     <Compile Include="Assets\Codigo\Replay.cs" />
+     <Compile Include="Assets\Codigo\Scroll.cs" />
+     <Compile Include="Assets\Codigo\Señuelo.cs" />
+     <Compile Include="Assets\Codigo\Textos.cs" />
+     <Compile Include="Assets\Codigo\Variables.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
