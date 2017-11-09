@@ -19,8 +19,8 @@ public class Armas : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-       
-	}
+  
+    }
     private void OnMouseDown()
     {
         if (variables.monedas > precio && variables.armas == 2)

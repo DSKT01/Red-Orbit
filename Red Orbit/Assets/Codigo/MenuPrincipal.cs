@@ -14,13 +14,13 @@ public class MenuPrincipal : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        menu = GameObject.Find("Menu");
-        Time.timeScale = 0;
-        interfaz = GameObject.Find("Interfaz");
         muerte = GameObject.Find("Muerte");
-        interfaz.SetActive(false);
-        muerte.SetActive(false);
-        cj = GameObject.Find("Jugador").GetComponent<ControlJugador>();
+        if (muerte != null)
+        {
+            muerte.SetActive(false);
+        }
+        
+       
 
     }
 
@@ -32,10 +32,8 @@ public class MenuPrincipal : MonoBehaviour
     }
     public void Jugar()
     {
-        menu.SetActive(false);
-        Time.timeScale = 1;
-        interfaz.SetActive(true);
-        cj.life = 10;
+
+        SceneManager.LoadScene("Game");
 
     }
     public void Salir()
@@ -44,12 +42,20 @@ public class MenuPrincipal : MonoBehaviour
     }
     public void Menu()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Menu");
 
     }
     public void Tienda()
     {
         SceneManager.LoadScene("Tienda");
+    }
+    public void Instrucciones()
+    {
+        SceneManager.LoadScene("Instrucciones");
+    }
+    public void Creditos()
+    {
+        SceneManager.LoadScene("Creditos");
     }
 
 }

@@ -19,10 +19,9 @@ public class Enemigo : MonoBehaviour
     public float distanciaDe = 0f;
     bool c = true;
     Variables variables;
-    
+    Espawn capEnemigos;
 
-    AudioSource mAudio;
-    AudioClip[] aQuejidos;
+  
     int num;
 
     // Use this for initialization
@@ -32,13 +31,8 @@ public class Enemigo : MonoBehaviour
         agente = GetComponent<NavMeshAgent>();
         target = GameObject.Find("Jugador").GetComponent<Transform>();
         mTransform = GetComponent<Transform>();
-        
+        capEnemigos = GameObject.Find("Spawn").GetComponent<Espawn>();
 
-        mAudio = GetComponent<AudioSource>();
-        aQuejidos = new AudioClip[] {Resources.Load("Audios/QuejidoEnemigo01") as AudioClip, 
-            Resources.Load("Audios/Quejido Enemigo 02") as AudioClip,
-            Resources.Load("Audios/Quejido Enemigo 03") as AudioClip,
-            Resources.Load("Audios/Quejido Enemigo 04") as AudioClip};
     } 
 
     // Update is called once per frame
@@ -67,7 +61,8 @@ public class Enemigo : MonoBehaviour
             if (lifeE <= 0)
             {
                 variables.muertes++;
-                variables.monedas += ((Random.Range(5, 15)) * variables.mMonedas);
+                variables.monedas += ((Random.Range(3, 10)) * variables.mMonedas);
+                capEnemigos.actuales--;
                 Destroy(this.gameObject);
                 
             }

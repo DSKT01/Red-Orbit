@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Espawn : MonoBehaviour
 {
+    public int lim;
+    public int actuales = 0;
     float temporizador = 30;
     public int alarma = 30;
     float temporizador2 = 0;
@@ -35,20 +37,25 @@ public class Espawn : MonoBehaviour
                 temporizador = 0;
             }
         }
+        Debug.Log(actuales);
     }
     void Esperar()
     {
         temporizador2 += Time.deltaTime;
         if (temporizador2 >= alarma2)
         {
-            Spawn();
+            if (actuales <= lim)
+            {
+                Spawn();
+            }       
             numEn++;
             temporizador2 = 0;
         }
     }
     void Spawn()
     {
-      GameObject clon = Instantiate(enemigos, posiciones[Random.Range(0,4)].transform.position, Quaternion.identity);
+        GameObject clon = Instantiate(enemigos, posiciones[Random.Range(0,4)].transform.position, Quaternion.identity);
+        actuales++;
         Enemigo clonComp = clon.GetComponent<Enemigo>();
         clonComp.activo = true;
         clonComp.siguiendo = true;

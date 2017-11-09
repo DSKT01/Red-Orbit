@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Arma : MonoBehaviour {
 
@@ -8,7 +9,8 @@ public class Arma : MonoBehaviour {
     Transform cTransform;
     AudioSource mAudio;
     public bool recargando;
-   
+    Text municion;
+    
     //Piscina de objetos(Atributos).
     GameObject[] piscina;
     public GameObject[][] proyectiles;
@@ -25,6 +27,7 @@ public class Arma : MonoBehaviour {
     public GameObject instanciaSeleccionada;        // La instancia que se va a disparar.
     BalasCompradas comprobar;
     void Start() {
+        municion = GameObject.Find("Municion").GetComponent<Text>();
         comprobar = GameObject.Find("BalasP").GetComponent<BalasCompradas>();
         comprobar.Start();
         partesBlancas = GameObject.Find("PartesBlancas").GetComponentsInChildren<Renderer>();
@@ -125,7 +128,7 @@ public class Arma : MonoBehaviour {
                             instancia++;
                         if (instancia == tipoSeleccionado.Length)
                             instancia = 0;
-                        tiposDeProyectil[proyActual].GetComponent<Proyectil>().color /= tiposDeProyectil[proyActual].GetComponent<Proyectil>().municion;
+                       
                         proyProy.disparable = false;
                         proyProy.enPiscina = false;
 
@@ -133,6 +136,7 @@ public class Arma : MonoBehaviour {
                         Vector3 pos = tRef.position;
                         cuerpoProyectil.velocity = new Vector3(0, 0, 0);    //eliminar el movimiento que tenía antes la bala.
                         proyTrans.position = pos;
+                        cuerpoProyectil.transform.forward = tRef.forward;
                         cuerpoProyectil.AddForce(tRef.forward * proyProy.magnitudDeDisparo);
                     }
                 }

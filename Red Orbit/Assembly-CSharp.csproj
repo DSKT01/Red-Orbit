@@ -58,6 +58,7 @@
      <Compile Include="Assets\Codigo\ControlLuces.cs" />
      <Compile Include="Assets\Codigo\ControlNiveles.cs" />
      <Compile Include="Assets\Codigo\Dash.cs" />
+     <Compile Include="Assets\Codigo\DeadZone.cs" />
      <Compile Include="Assets\Codigo\Direccion.cs" />
      <Compile Include="Assets\Codigo\Enemigo.cs" />
      <Compile Include="Assets\Codigo\Espawn.cs" />
@@ -73,6 +74,7 @@
      <Compile Include="Assets\Codigo\Proyectil.cs" />
      <Compile Include="Assets\Codigo\Referencia.cs" />
      <Compile Include="Assets\Codigo\Replay.cs" />
+     <Compile Include="Assets\Codigo\RotacionCirculo.cs" />
      <Compile Include="Assets\Codigo\Scroll.cs" />
      <Compile Include="Assets\Codigo\Señuelo.cs" />
      <Compile Include="Assets\Codigo\Textos.cs" />

@@ -11,13 +11,15 @@ public class ControlCursor : MonoBehaviour
     float maxDisX = 25;                                                                                                                                                                                               // distancia maxima del cursor en x al jugador
     [SerializeField]
     float maxDisZ = 10;                                                                                                                                                                                               // distancia maxima del cursor en z al jugador
-
+    Transform cTrans, hTrans;
    
     void Start()
     {
+        cTrans = GameObject.Find("PCamara").GetComponent<Transform>();
         jTrans = GameObject.Find("Jugador").GetComponent<Transform>();                                                                                     // acceso al transformador del jugador
         transform.position = new Vector3(jTrans.position.x, 2, jTrans.position.z);                                                                             // setear una posicion inicial para el cursor(especialmente en y)
         player = new Vector3(jTrans.position.x, 0, jTrans.position.z);                                                                                                       // setear una posicion inicial de "player" para calcular el delta de movimiento mas tarde
+        hTrans = transform.Find("Marcador").transform;
     }
 
 
@@ -25,6 +27,8 @@ public class ControlCursor : MonoBehaviour
     {
         if (Time.timeScale == 1)                                                                                                                                                                                // verificar que el juego no este pausado
         {
+            hTrans.LookAt(cTrans.position);
+            hTrans.localPosition = new Vector3(0, 0, -10);
             Cursor.lockState = CursorLockMode.Locked;                                                                                                                                 // bloquear el puntero en el centro de la pantalla
             float mouseX = Input.GetAxis("Mouse X");                                                                                                                                       // input de del mouse en x (no depende de la posicion del puntero)
             float mouseZ = Input.GetAxis("Mouse Y");                                                                                                                                       // input de del mouse en x (no depende de la posicion del puntero)
@@ -32,7 +36,9 @@ public class ControlCursor : MonoBehaviour
             transform.position += mouse + Delta(player);                                                                                                                                // se mueve la posicion segun el input del mouse, "delta" permite moverse junto al personaje al sumar la cantidad de movimiento hecha por el personaje desde el frame anterior
             transform.position = new Vector3(transform.position.x, jTrans.position.y + 1.81f, transform.position.z);          // para mantener la poscion en el eje y igual a la del arma del jugador
             player = new Vector3(jTrans.position.x, 0, jTrans.position.z);                                                                                                  // se almacenan los valores de player al final para que "delta" trabaje con los datos anteriores (y es 0 para no alterar el movimiento en este eje)
+
         }
+
         else
         {
             Cursor.lockState = CursorLockMode.None;                                                                                                                                    // si esta pausado desbloquea el puntero del centro de la pantalla

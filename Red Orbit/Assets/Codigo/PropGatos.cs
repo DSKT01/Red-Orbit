@@ -79,6 +79,15 @@ public class PropGatos : MonoBehaviour {
 
                     foreach (Collider golpeado in colliders)
                     {
+                        GameObject obj = golpeado.gameObject;
+                        if (obj.tag == "Player")
+                        {
+                            ControlJugador jugador = obj.GetComponent<ControlJugador>();
+                            if (!(jugador.life >= 10))
+                            {
+                                jugador.Damage(-1);
+                            }
+                        }
                         Rigidbody c = golpeado.GetComponent<Rigidbody>();                                       // Obtener el rigidbody de cada objeto golpeado por la explosión.
                         if (c != null)                                                                          // Que no lo aplique si no hay rigidbody.
                             c.AddExplosionForce(magnitudExplosion, posExp, radio, upforce, ForceMode.Acceleration);  // Explotar esa vaina.
