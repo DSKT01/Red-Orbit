@@ -11,22 +11,25 @@ public class Movimiento : MonoBehaviour
     float magD;
     Transform mTransform;
     Rigidbody mRigidbody;
-    public float dashCD;
+    public float dashCD=8;
     bool onCDSalto = false;
     float tD = 0f;
     AudioSource mAudio;
     AudioClip aPasos, aSalto;
     bool enTierra = false;
     public bool animacion = false;
+    Variables variables;
 
     void Start()
     {
+        variables = GameObject.Find("Variables").GetComponent<Variables>();
         mTransform = GetComponent<Transform>();
         mRigidbody = GetComponent<Rigidbody>();
         mAudio = GetComponent<AudioSource>();
         aPasos = Resources.Load("Audios/Pasos") as AudioClip;
         aSalto = Resources.Load("Audios/Salto") as AudioClip;
-
+        dashCD = (dashCD / variables.dash);
+        
     }
     void Update()
     {

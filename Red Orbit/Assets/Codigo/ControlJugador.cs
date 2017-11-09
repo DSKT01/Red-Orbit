@@ -11,8 +11,10 @@ public class ControlJugador : MonoBehaviour
     Image barraVidaDos;
     Arma arma;
     GameObject muerte;
+    Variables variables;
     void Start()
     {
+        variables = GameObject.Find("Variables").GetComponent<Variables>();
         transform.forward = new Vector3(1, 0, 0);
         mMovimiento = GetComponent<Movimiento>();
         barraVidaUno = GameObject.Find("BarraR").GetComponent<Image>();
@@ -22,12 +24,13 @@ public class ControlJugador : MonoBehaviour
         barraVidaDos.fillAmount = 1;
         muerte = GameObject.Find("Muerte");
 
+        life = life * variables.aVida;
+
     }
 
 
     void Update()
     {
-
         if (Time.timeScale == 1)
         {
             mMovimiento.HMove();
@@ -36,7 +39,6 @@ public class ControlJugador : MonoBehaviour
             arma.Disparar(arma.instanciaSeleccionada);
             arma.Recargar();
             arma.CambiarArma();
-            arma.Apuntar();
         }
         
         if (life <= 0)

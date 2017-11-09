@@ -50,6 +50,7 @@
      <Compile Include="Assets\Codigo\ArmaFixMov.cs" />
      <Compile Include="Assets\Codigo\Armas.cs" />
      <Compile Include="Assets\Codigo\AumentoVid.cs" />
+     <Compile Include="Assets\Codigo\BalasCompradas.cs" />
      <Compile Include="Assets\Codigo\Boss.cs" />
      <Compile Include="Assets\Codigo\ControlAnimador.cs" />
      <Compile Include="Assets\Codigo\ControlCursor.cs" />
@@ -66,6 +67,7 @@
      <Compile Include="Assets\Codigo\MultMon.cs" />
      <Compile Include="Assets\Codigo\Permanente.cs" />
      <Compile Include="Assets\Codigo\PlanetRotation.cs" />
+     <Compile Include="Assets\Codigo\PropBombas.cs" />
      <Compile Include="Assets\Codigo\PropGatos.cs" />
      <Compile Include="Assets\Codigo\PropLaser.cs" />
      <Compile Include="Assets\Codigo\Proyectil.cs" />

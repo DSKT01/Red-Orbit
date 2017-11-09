@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Proyectil : MonoBehaviour
 {
-    public bool comprado = true;
+    public bool comprado = false;
     public float daño;
     public float magnitudDeDisparo;
     public int municion;
@@ -21,26 +21,27 @@ public class Proyectil : MonoBehaviour
     Rigidbody mCuerpo;
     public Vector3 posicionOriginal;       
     public Quaternion rotacionOriginal;
- 
+    BalasCompradas comprobar;
     void Start()
     {
+        comprobar = GameObject.Find("BalasP").GetComponent<BalasCompradas>();
+        comprobar.Start();
         cTrans = GameObject.Find("PCamara").GetComponent<Transform>();
         vectorcito = Vector3.Cross(cTrans.forward, cTrans.right);
         mRenderer = GetComponent<Renderer>();
         posicionOriginal = transform.position;  // Guardar las rotaciones y posiciones en que se crearon.
         rotacionOriginal = transform.rotation;
 
+        
+
         mCuerpo = GetComponent<Rigidbody>();
         mCuerpo.Sleep();
+
     }
     
     void Update()
     {
-        transform.LookAt(Camera.main.transform.position, cTrans.up);
-    }
-
-    void producto()
-    {
 
     }
+
 }

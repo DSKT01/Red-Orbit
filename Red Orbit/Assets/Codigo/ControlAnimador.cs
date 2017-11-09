@@ -41,14 +41,6 @@ public class ControlAnimador : MonoBehaviour
     {
         anim.SetLookAtWeight(1);
         anim.SetLookAtPosition(new Vector3(cursor.position.x, transform.position.y+ 2.2f, cursor.position.z));
-        anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0.1f);
-        anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0.1f);
-        anim.SetIKRotation(AvatarIKGoal.LeftHand, targetL.rotation);
-        anim.SetIKRotation(AvatarIKGoal.RightHand, targetR.rotation);
-        anim.SetIKPosition(AvatarIKGoal.LeftHand, targetL.position);
-        anim.SetIKPosition(AvatarIKGoal.RightHand, targetR.position);
-
-
     }
     void Almacen()
     {

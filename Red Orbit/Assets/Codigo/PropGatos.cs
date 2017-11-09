@@ -15,7 +15,8 @@ public class PropGatos : MonoBehaviour {
     public float radio,                     // Radio de la explosión.
         upforce;                            // Fuerza ejercida hacia arriba por la explosión en los objetos afectados.
     Vector3 posExp,                         // Posición de la explosión.
-        p;                                  // Posición original de la bala (En la piscina).
+        p,                                  // Posición original de la bala (En la piscina).
+        s;                                  // Escala       "        "       "       "      " 
     Quaternion r;                           // Rotación original de la bala (Piscina).
 
     PropGatos[] compañeros;
@@ -31,6 +32,7 @@ public class PropGatos : MonoBehaviour {
         t = tDetonación;
         p = transform.position;
         r = transform.rotation;
+        s = transform.localScale;
     }
 	
 	// Update is called once per frame
@@ -40,17 +42,19 @@ public class PropGatos : MonoBehaviour {
         {
             mCuerpo.Sleep();
             mCuerpo.velocity = new Vector3(0, 0, 0);
+            transform.localScale = s;
         }
 
         if (proyComp.enPiscina)
         {
             activa = false;
+            mRender.material.color = new Color(1, 1, 1);
         }
 
         if (activa)
         {
-            mRender.material.color += new Color(1 / tDetonación, -1 / tDetonación, -1 / tDetonación);
-
+            mRender.material.color += new Color((1 / tDetonación) * Time.deltaTime, -(1 / tDetonación) * Time.deltaTime, -(1 / tDetonación) * Time.deltaTime);
+            transform.localScale += new Vector3(0.25f, 0.25f, 0.25f) * Time.deltaTime;
         }
     }
 
@@ -77,7 +81,7 @@ public class PropGatos : MonoBehaviour {
                     {
                         Rigidbody c = golpeado.GetComponent<Rigidbody>();                                       // Obtener el rigidbody de cada objeto golpeado por la explosión.
                         if (c != null)                                                                          // Que no lo aplique si no hay rigidbody.
-                            c.AddExplosionForce(magnitudExplosion, posExp, radio, upforce, ForceMode.Impulse);  // Explotar esa vaina.
+                            c.AddExplosionForce(magnitudExplosion, posExp, radio, upforce, ForceMode.Acceleration);  // Explotar esa vaina.
                     }
                     transform.position = p;                                                                     // Devolverla a la piscina.
                     transform.rotation = r;

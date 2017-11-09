@@ -31,12 +31,12 @@ public class MenuPrincipal : MonoBehaviour
 
     }
     public void Jugar()
-    {        
-        menu.SetActive(false);        
+    {
+        menu.SetActive(false);
         Time.timeScale = 1;
         interfaz.SetActive(true);
         cj.life = 10;
-        
+
     }
     public void Salir()
     {
@@ -45,7 +45,11 @@ public class MenuPrincipal : MonoBehaviour
     public void Menu()
     {
         SceneManager.LoadScene("Game");
-        
+
+    }
+    public void Tienda()
+    {
+        SceneManager.LoadScene("Tienda");
     }
 
 }

@@ -52,5 +52,13 @@ public class Espawn : MonoBehaviour
         Enemigo clonComp = clon.GetComponent<Enemigo>();
         clonComp.activo = true;
         clonComp.siguiendo = true;
+        clonComp.lifeE = Random.Range(1, 6);
+        Renderer[] cRender = clonComp.GetComponentsInChildren<Renderer>();
+        for (int i = 0; i < cRender.Length; i++)
+        {
+            cRender[i].material.color = new Color((1 / Random.Range(1, 5)), (1 / Random.Range(1, 5)), (1 / Random.Range(1, 5)), 1);
+        }
+        clonComp.velocidad = Random.Range(4, 11);
+        clonComp.daño = Random.Range(1, 3);
     }
 }

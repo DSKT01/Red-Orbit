@@ -12,7 +12,7 @@ public class Enemigo : MonoBehaviour
     public bool siguiendo = true;
     public float te = 2f;
     public float t = 0f;
-    public float retroceso = 0f;
+
     public float lifeE = 1;
     public float velocidad = 5f;
     public float daño = 1f;
@@ -83,10 +83,9 @@ public class Enemigo : MonoBehaviour
         {
             ControlJugador cj = objeto.GetComponent<ControlJugador>();
             Rigidbody jRigid = objeto.GetComponent<Rigidbody>();
-            Vector3 fuerza = mTransform.forward * retroceso * 1;
-            jRigid.AddForce(fuerza);
+
             siguiendo = false;
-            cj.Damage(1);
+            cj.Damage(daño);
 
         }
         
