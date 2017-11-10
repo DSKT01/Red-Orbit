@@ -19,7 +19,7 @@ public class ControlCursor : MonoBehaviour
         jTrans = GameObject.Find("Jugador").GetComponent<Transform>();                                                                                     // acceso al transformador del jugador
         transform.position = new Vector3(jTrans.position.x, 2, jTrans.position.z);                                                                             // setear una posicion inicial para el cursor(especialmente en y)
         player = new Vector3(jTrans.position.x, 0, jTrans.position.z);                                                                                                       // setear una posicion inicial de "player" para calcular el delta de movimiento mas tarde
-        hTrans = transform.Find("Marcador").transform;
+        hTrans = GameObject.Find("Marcador").GetComponent<Transform>();
     }
 
 
@@ -27,8 +27,7 @@ public class ControlCursor : MonoBehaviour
     {
         if (Time.timeScale == 1)                                                                                                                                                                                // verificar que el juego no este pausado
         {
-            hTrans.LookAt(cTrans.position);
-            hTrans.localPosition = new Vector3(0, 0, -10);
+            hTrans.LookAt(cTrans.position);            
             Cursor.lockState = CursorLockMode.Locked;                                                                                                                                 // bloquear el puntero en el centro de la pantalla
             float mouseX = Input.GetAxis("Mouse X");                                                                                                                                       // input de del mouse en x (no depende de la posicion del puntero)
             float mouseZ = Input.GetAxis("Mouse Y");                                                                                                                                       // input de del mouse en x (no depende de la posicion del puntero)

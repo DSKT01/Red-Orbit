@@ -17,6 +17,10 @@ public class MultMon : MonoBehaviour {
     {
         sprite = GetComponent<SpriteRenderer>();
         variables = GameObject.Find("Variables").GetComponent<Variables>();
+        if (variables.mMonedas == 2)
+            sprite.sprite = spr1;
+        if (variables.mMonedas == 3)
+            sprite.sprite = spr2;
     }
 
     // Update is called once per frame
@@ -47,10 +51,23 @@ public class MultMon : MonoBehaviour {
         texto.rectTransform.position = Input.mousePosition;
         if (variables.mMonedas == 3)
         {
+            float a, b, c;
+            a = 58 / 255;
+            b = 156 / 255;
+            c = 63 / 255;
             texto.text = "Unlocked";
+            texto.color = new Color(a, b, c, 1);
         }
         else
+        {
+            float a, b, c;
+            a = 165 / 255;
+            b = 121 / 255;
+            c = 27 / 255;
             texto.text = precio.ToString();
+            texto.color = new Color(a, b, c, 1);
+        }
+
     }
 
     private void OnMouseExit()

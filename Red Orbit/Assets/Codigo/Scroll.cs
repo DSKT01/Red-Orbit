@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Scroll : MonoBehaviour {
-
-    public Scrollbar scroll;
+    [SerializeField]
+    Scrollbar scroll;
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +16,7 @@ public class Scroll : MonoBehaviour {
 	void Update () {
 
         scroll.value -= Input.mouseScrollDelta.y/20;
-        transform.position = new Vector3(transform.position.x, 3.4f + (scroll.value*17.5f), transform.position.z);
+        transform.position = new Vector3(transform.position.x, 3.5f + (scroll.value*5.5f), transform.position.z);
             
             
 	}

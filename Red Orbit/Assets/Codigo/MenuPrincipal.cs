@@ -5,10 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuPrincipal : MonoBehaviour
 {
-    GameObject menu;
-    GameObject interfaz;
     GameObject muerte;
-    ControlJugador cj;
 
 
     // Use this for initialization
@@ -20,8 +17,7 @@ public class MenuPrincipal : MonoBehaviour
             muerte.SetActive(false);
         }
         
-       
-
+        
     }
 
 
@@ -32,9 +28,7 @@ public class MenuPrincipal : MonoBehaviour
     }
     public void Jugar()
     {
-
         SceneManager.LoadScene("Game");
-
     }
     public void Salir()
     {
@@ -49,9 +43,10 @@ public class MenuPrincipal : MonoBehaviour
     {
         SceneManager.LoadScene("Tienda");
     }
+
     public void Instrucciones()
     {
-        SceneManager.LoadScene("Instrucciones");
+        SceneManager.LoadScene("Istrucciones");
     }
     public void Creditos()
     {

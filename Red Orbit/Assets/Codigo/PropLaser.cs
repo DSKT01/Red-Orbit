@@ -36,7 +36,7 @@ public class PropLaser : MonoBehaviour {
     {
         t = 0;
         GameObject obj = _x.gameObject;
-        if (obj.tag == "Enemigo")
+        if ((obj.tag == "Enemigo") || (obj.tag == "Piedras"))
         {
             Reaparecer();
         }

@@ -71,9 +71,9 @@
      <Compile Include="Assets\Codigo\PropBombas.cs" />
      <Compile Include="Assets\Codigo\PropGatos.cs" />
      <Compile Include="Assets\Codigo\PropLaser.cs" />
+     <Compile Include="Assets\Codigo\PropSeñuelo.cs" />
      <Compile Include="Assets\Codigo\Proyectil.cs" />
      <Compile Include="Assets\Codigo\Referencia.cs" />
-     <Compile Include="Assets\Codigo\Replay.cs" />
      <Compile Include="Assets\Codigo\RotacionCirculo.cs" />
      <Compile Include="Assets\Codigo\Scroll.cs" />
      <Compile Include="Assets\Codigo\Señuelo.cs" />

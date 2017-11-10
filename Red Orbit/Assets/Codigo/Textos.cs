@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class Textos : MonoBehaviour {
     Variables variables;
-    public Text moneditas;
-    public Text muertesitas;
+    [SerializeField]
+    Text moneditas;
+    [SerializeField]
+    Text muertesitas;
 	// Use this for initialization
 	void Start () {
         variables = GameObject.Find("Variables").GetComponent<Variables>();

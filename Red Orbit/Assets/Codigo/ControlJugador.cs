@@ -15,7 +15,7 @@ public class ControlJugador : MonoBehaviour
     void Start()
     {
         variables = GameObject.Find("Variables").GetComponent<Variables>();
-        transform.forward = new Vector3(1, 0, 0);
+       
         mMovimiento = GetComponent<Movimiento>();
         barraVidaUno = GameObject.Find("BarraR").GetComponent<Image>();
         barraVidaDos = GameObject.Find("BarraL").GetComponent<Image>();

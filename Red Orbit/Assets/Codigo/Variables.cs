@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Variables : MonoBehaviour {
-    public int monedas;
-    public int muertes;
+    public int monedas = 0;
+    public int muertes = 0;
     public int armas;
     public int aVida;
     public int dash;
@@ -14,8 +14,7 @@ public class Variables : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        monedas = 0;
-        muertes = 0;
+
         armas = 1;
         aVida = 1;
         dash = 1;

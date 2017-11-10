@@ -37,7 +37,7 @@ public class Espawn : MonoBehaviour
                 temporizador = 0;
             }
         }
-        Debug.Log(actuales);
+      
     }
     void Esperar()
     {

@@ -7,13 +7,14 @@ public class Arma : MonoBehaviour {
 
     Renderer[] partesBlancas;
     Transform cTransform;
-    AudioSource mAudio;
+    
     public bool recargando;
     Text municion;
     
     //Piscina de objetos(Atributos).
     GameObject[] piscina;
     public GameObject[][] proyectiles;
+
     public int proyActual = 0,                  //Tipo de proyectil actualmente seleccionado.
         instancia = 0;                          //Instancia que se va a disparar del tipo de proyectil seleccionado.
     int[] municiones;                           // Valores de la MUNICIÓN que cada proyectil tiene.
@@ -31,10 +32,6 @@ public class Arma : MonoBehaviour {
         comprobar = GameObject.Find("BalasP").GetComponent<BalasCompradas>();
         comprobar.Start();
         partesBlancas = GameObject.Find("PartesBlancas").GetComponentsInChildren<Renderer>();
-        // apuntar:
-        cTransform = GameObject.Find("Cursor").GetComponent<Transform>();
-        //sonidos:
-        mAudio = GetComponent<AudioSource>();
                 
         componentesDeProyectil = GameObject.Find("BalasP").GetComponentsInChildren<Proyectil>();
         tiposDeProyectil = new GameObject[componentesDeProyectil.Length];
