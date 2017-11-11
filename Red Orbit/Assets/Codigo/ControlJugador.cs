@@ -14,6 +14,7 @@ public class ControlJugador : MonoBehaviour
     Variables variables;
     void Start()
     {
+
         variables = GameObject.Find("Variables").GetComponent<Variables>();
        
         mMovimiento = GetComponent<Movimiento>();
@@ -25,7 +26,7 @@ public class ControlJugador : MonoBehaviour
         muerte = GameObject.Find("Muerte");
 
         life = life * variables.aVida;
-
+        Time.timeScale = 1;
     }
 
 
